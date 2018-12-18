@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181218074913) do
+ActiveRecord::Schema.define(version: 20181218104544) do
 
   create_table "agencies", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -31,6 +31,21 @@ ActiveRecord::Schema.define(version: 20181218074913) do
   end
 
   add_index "agencies", ["uuid"], name: "index_agencies_on_uuid", unique: true, using: :btree
+
+  create_table "airlines", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "stars",      limit: 4
+    t.string   "city",       limit: 255
+    t.text     "details",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -64,6 +79,20 @@ ActiveRecord::Schema.define(version: 20181218074913) do
   end
 
   add_index "tours", ["uuid"], name: "index_tours_on_uuid", unique: true, using: :btree
+
+  create_table "uploads", force: :cascade do |t|
+    t.string   "uploadable_type",         limit: 255
+    t.integer  "uploadable_id",           limit: 4
+    t.string   "attachment_type",         limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 8
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "uploads", ["uploadable_id"], name: "index_uploads_on_uploadable_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

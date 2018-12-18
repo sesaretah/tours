@@ -1,0 +1,37 @@
+$(".list-group-item-action.active").removeClass('active');
+<% if @section == 'homepage'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'segments/business_segment')) %>");
+$("#homepage-nav").addClass('active');
+<%end%>
+<% if @section == 'airlines'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'airlines/agency_airlines')) %>");
+$("#homepage-nav").addClass('active');
+<%end%>
+<% if @section == 'hotels'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'segments/business_segment')) %>");
+$("#homepage-nav").addClass('active');
+<%end%>
+<% if @section == 'slider'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'home/slide_settings')) %>");
+$("#slider-nav").addClass('active');
+<%end%>
+
+<% if @section == 'faq'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'faqs/business_faqs')) %>");
+$("#faq-nav").addClass('active');
+<%end%>
+
+<% if @section == 'theme'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'businesses/change_theme')) %>");
+$("#theme-nav").addClass('active');
+<%end%>
+
+<% if @section == 'pixel'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'pixels/business_pixel')) %>");
+$("#pixel-nav").addClass('active');
+<%end%>
+
+<% if @section == 'sales'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'home/sales_settings')) %>");
+$("#sales-nav").addClass('active');
+<%end%>

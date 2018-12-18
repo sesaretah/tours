@@ -15,55 +15,40 @@
 <% end %>
 
 <div class="card-body">
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :title, class: "form-label" %>
-      <%= f.text_field :title , class: "form-control" %>
-          </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :title, class: "form-label" %>
+        <%= f.text_field :title , class: "form-control" %>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :days, class: "form-label" %>
-      <%= f.number_field :days , class: "form-control" %>
-          </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= f.label :days, class: "form-label" %>
+        <%= f.number_field :days , class: "form-control" %>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :nights, class: "form-label" %>
-      <%= f.number_field :nights , class: "form-control" %>
-          </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= f.label :nights, class: "form-label" %>
+        <%= f.number_field :nights , class: "form-control" %>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :details, class: "form-label" %>
-      <%= f.text_area :details , class: "form-control" %>
-          </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label :details, class: "form-label" %>
+        <%= f.text_area :details , class: "form-control" %>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :agency_id, class: "form-label" %>
-      <%= f.number_field :agency_id , class: "form-control" %>
-          </div>
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary"><%=t :submit%></button>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :uuid, class: "form-label" %>
-      <%= f.text_field :uuid , class: "form-control" %>
-          </div>
-  </div>
-</div>
-<div class="card-footer text-right">
-  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
 </div>
 <% end %>

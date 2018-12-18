@@ -227,9 +227,11 @@ fa:
             email: 'ایمیل'
             address: 'آدرس'
             about_us: 'درباره ما'
-        river:
+        tour_package:
             title: 'عنوان '
-            content: 'متن '
+            days: 'تعداد روز'
+            nights: 'تعداد شب'
+            details: 'شرح'
         user:
             username: 'تلفن همراه کاربر'
             mobile: 'شماره تلفن همراه'
@@ -242,6 +244,23 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  sales_settings: 'تنظیمات فروش'
+  theme_settings: 'تنظیمات ظاهر سایت'
+  faq_settings: 'تنظیمات سوالات متداول'
+  slider_settings: 'تنظیمات اسلاید'
+  home_settings: 'تنظیمات صفحه خانه'
+  flight_settings: 'تنظیمات پرواز ها'
+  hotel_settings: 'تنظیمات هتل'
+  mobile_app_management: 'مدیریت اپ موبایل'
+  days: 'روز'
+  and: 'و'
+  nights: 'شب'
+  new_tour_package: 'فرم پکیج تور'
+  drop_files_here_to_upload: 'برای بارگذاری فایل را اینجا بیاندازید یا کلیک کنید'
+  remove_file: 'حذف فایل'
+  settings: 'تنظیمات'
+  home: 'خانه'
+  tour_packages: 'تورها'
   agency_form: 'فرم اطلاعات شرکت'
   sign_out: 'خروج '
   email: 'ایمیل'

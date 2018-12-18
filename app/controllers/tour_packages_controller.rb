@@ -1,6 +1,9 @@
 class TourPackagesController < ApplicationController
-  before_action :set_tour_package, only: [:show, :edit, :update, :destroy]
+  before_action :set_tour_package, only: [:show, :edit, :update, :destroy, :upload]
 
+  def upload
+
+  end
   # GET /tour_packages
   # GET /tour_packages.json
   def index
@@ -28,7 +31,7 @@ class TourPackagesController < ApplicationController
 
     respond_to do |format|
       if @tour_package.save
-        format.html { redirect_to @tour_package, notice: 'Tour package was successfully created.' }
+        format.html { redirect_to "/tour_packages/upload/#{@tour_package.id}", notice: 'Tour package was successfully created.' }
         format.json { render :show, status: :created, location: @tour_package }
       else
         format.html { render :new }
@@ -42,7 +45,11 @@ class TourPackagesController < ApplicationController
   def update
     respond_to do |format|
       if @tour_package.update(tour_package_params)
-        format.html { redirect_to @tour_package, notice: 'Tour package was successfully updated.' }
+        if !params['upload'].blank?
+          format.html { redirect_to "/tour_packages/upload/#{@tour_package.id}", notice: 'Tour package was successfully updated.' }
+        else
+          format.html { redirect_to "/tour_packages", notice: 'Tour package was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @tour_package }
       else
         format.html { render :edit }
