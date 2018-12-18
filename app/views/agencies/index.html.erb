@@ -1,0 +1,47 @@
+<div class="row row-cards">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="card">
+      <table class="table card-table table-vcenter">
+        <tbody>
+          <% @agencies.each do |agency| %>
+          <tr>
+                        <td><%= agency.name %></td>
+                        <td><%= agency.tel %></td>
+                        <td><%= agency.telegram_channel %></td>
+                        <td><%= agency.instagram_page %></td>
+                        <td><%= agency.address %></td>
+                        <td><%= agency.uuid %></td>
+                        <td><%= agency.user_id %></td>
+                        <td><%= agency.subdomain %></td>
+                        <td><%= agency.mobile %></td>
+                        <td><%= agency.fax %></td>
+                        <td><%= agency.email %></td>
+                        <td><%= agency.about_us %></td>
+                        <td><%= link_to t(:show), agency %></td>
+            <td><%= link_to t(:edit), edit_agency_path(agency) %></td>
+            <td><%= link_to t(:destroy), agency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

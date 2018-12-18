@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  days: 1
+  nights: 1
+  details: MyText
+  agency_id: 1
+  uuid: MyString
+
+two:
+  title: MyString
+  days: 1
+  nights: 1
+  details: MyText
+  agency_id: 1
+  uuid: MyString
