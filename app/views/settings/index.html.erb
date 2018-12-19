@@ -2,16 +2,20 @@
   <div class="col-lg-3 ">
     <div class="list-group list-group-transparent mb-4">
 
-      <%= link_to '/settings?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
+      <%= link_to '/settings/section?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
       <i class="fe fe-shopping-cart" style="vertical-align:-3px;"></i> <%=t :sales_settings%>
       <%end%>
 
-      <%= link_to '/settings?section=airlines', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <%= link_to '/settings/sections?section=airlines', id: 'airlines-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fa fa-plane" style="vertical-align:-1px;"></i> <%=t :flight_settings%>
       <%end%>
 
       <%= link_to '/home/settings?section=hotel', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fa fa-bed" style="vertical-align:-1px;"></i> <%=t :hotel_settings%>
+      <%end%>
+
+      <%= link_to '/home/settings?section=trains', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <i class="fa fa-train" style="vertical-align:-1px;"></i> <%=t :train_settings%>
       <%end%>
 
       <%= link_to '/home/settings?section=homepage',id: 'homepage-nav', class: "list-group-item list-group-item-action active small mb-1", style:'font-weight:normal;', remote: true do%>

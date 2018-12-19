@@ -244,13 +244,15 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  airline_name: 'نام ایرلاین'
   sales_settings: 'تنظیمات فروش'
   theme_settings: 'تنظیمات ظاهر سایت'
   faq_settings: 'تنظیمات سوالات متداول'
   slider_settings: 'تنظیمات اسلاید'
   home_settings: 'تنظیمات صفحه خانه'
-  flight_settings: 'تنظیمات پرواز ها'
-  hotel_settings: 'تنظیمات هتل'
+  flight_settings: 'تعریف ایرلاین ها'
+  hotel_settings: 'تعریف هتل ها'
+  train_settings: 'تعریف قطارها'
   mobile_app_management: 'مدیریت اپ موبایل'
   days: 'روز'
   and: 'و'

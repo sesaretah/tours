@@ -3,9 +3,10 @@ $(".list-group-item-action.active").removeClass('active');
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'segments/business_segment')) %>");
 $("#homepage-nav").addClass('active');
 <%end%>
+
 <% if @section == 'airlines'%>
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'airlines/agency_airlines')) %>");
-$("#homepage-nav").addClass('active');
+$("#airlines-nav").addClass('active');
 <%end%>
 <% if @section == 'hotels'%>
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'segments/business_segment')) %>");

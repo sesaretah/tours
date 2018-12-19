@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transportable_type: MyString
+  transportable_id: 1
+  tour_id: 1
+
+two:
+  transportable_type: MyString
+  transportable_id: 1
+  tour_id: 1

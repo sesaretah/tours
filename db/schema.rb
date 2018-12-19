@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181218104544) do
+ActiveRecord::Schema.define(version: 20181219093943) do
 
   create_table "agencies", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20181218104544) do
   end
 
   add_index "tours", ["uuid"], name: "index_tours_on_uuid", unique: true, using: :btree
+
+  create_table "transportations", force: :cascade do |t|
+    t.string   "transportable_type", limit: 255
+    t.integer  "transportable_id",   limit: 4
+    t.integer  "tour_id",            limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "uploads", force: :cascade do |t|
     t.string   "uploadable_type",         limit: 255

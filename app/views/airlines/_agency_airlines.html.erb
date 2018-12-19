@@ -1,12 +1,16 @@
 <div id='settings-detail'>
-<%= form_tag '/airlines', remote: true, method: post do%>
+<%= form_tag '/airlines', remote: true, method: :post do%>
 <div class="row">
   <div class="col-md-5">
     <div class="form-group">
       <label class="form-label"><%=t :airline_name%></label>
-      <%= text_field_tag :name/ nil , class: "form-control" %>
+      <%= text_field_tag :name, nil , class: "form-control" %>
     </div>
+  </div>
+  <div class="col-md-5">
+    <button type="submit" class="btn btn-primary" style="margin-top:26px"><%=t :submit%></button>
   </div>
 </div>
 <%end%>
+<%= render partial: 'airlines/list'%>
 </div>
