@@ -2,11 +2,11 @@
   <div class="col-lg-3 ">
     <div class="list-group list-group-transparent mb-4">
 
-      <%= link_to '/home/settings?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
+      <%= link_to '/settings?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
       <i class="fe fe-shopping-cart" style="vertical-align:-3px;"></i> <%=t :sales_settings%>
       <%end%>
 
-      <%= link_to '/home/settings?section=airlines', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <%= link_to '/settings?section=airlines', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fa fa-plane" style="vertical-align:-1px;"></i> <%=t :flight_settings%>
       <%end%>
 
@@ -41,7 +41,7 @@
   <div class="col-md-9 order-lg-1">
     <div class="card">
       <div class="card-body">
-
+        <div id='settings-detail'></div>
         <div class='mb-4'></div>
       </div>
     </div>
