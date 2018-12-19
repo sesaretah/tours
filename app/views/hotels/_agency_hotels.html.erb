@@ -1,0 +1,28 @@
+<div id='settings-detail'>
+<%= form_tag '/hotels', remote: true, method: :post do%>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <label class="form-label"><%=t :hotel_name%></label>
+      <%= text_field_tag :name, nil , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label class="form-label"><%=t :stars%></label>
+      <%= select_tag :stars, options_for_select((1..5).step(1)), {class: "form-control"}%>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="form-label"><%=t :city%></label>
+      <%= text_field_tag :city, nil , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary" style="margin-top:26px"><%=t :submit%></button>
+  </div>
+</div>
+<%end%>
+<%= render partial: 'hotels/list'%>
+</div>

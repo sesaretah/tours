@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  accomodable_type: MyString
+  accomodable_id: 1
+  tour_id: 1
+
+two:
+  accomodable_type: MyString
+  accomodable_id: 1
+  tour_id: 1

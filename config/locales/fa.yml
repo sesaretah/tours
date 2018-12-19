@@ -244,6 +244,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  number_of_tours: 'تعداد تورهای مرتبط '
+  city: 'شهر'
+  hotel_name: 'نام هتل'
+  stars: 'ستاره '
   airline_name: 'نام ایرلاین'
   sales_settings: 'تنظیمات فروش'
   theme_settings: 'تنظیمات ظاهر سایت'
