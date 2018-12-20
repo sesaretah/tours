@@ -14,8 +14,12 @@
       <i class="fa fa-bed" style="vertical-align:-1px;"></i> <%=t :hotel_settings%>
       <%end%>
 
-      <%= link_to '/home/settings?section=trains', id: 'pixel-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <%= link_to '/settings/sections?section=trains', id: 'trains-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fa fa-train" style="vertical-align:-1px;"></i> <%=t :train_settings%>
+      <%end%>
+
+      <%= link_to '/settings/sections?section=price_types', id: 'price_types-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <i class="fa fa-money" style="vertical-align:-1px;"></i> <%=t :price_types_settings%>
       <%end%>
 
       <%= link_to '/home/settings?section=homepage',id: 'homepage-nav', class: "list-group-item list-group-item-action active small mb-1", style:'font-weight:normal;', remote: true do%>

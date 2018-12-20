@@ -3,7 +3,7 @@ class TourPackage < ActiveRecord::Base
   has_many :tours
 
   def image(style)
-    @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self.uuid, attachment_type: 'tour_package_attachment').first
+    @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self[:id], attachment_type: 'tour_package_attachment').first
     if !@upload.blank?
       return @upload.attachment(style)
     else

@@ -25,9 +25,11 @@ class ToursController < ApplicationController
   # POST /tours.json
   def create
     @tour = Tour.new(tour_params)
-
+    extract_packages
+    extract_dates
     respond_to do |format|
       if @tour.save
+        extract_accomodations
         format.html { redirect_to @tour, notice: 'Tour was successfully created.' }
         format.json { render :show, status: :created, location: @tour }
       else
@@ -40,6 +42,7 @@ class ToursController < ApplicationController
   # PATCH/PUT /tours/1
   # PATCH/PUT /tours/1.json
   def update
+    extract_dates
     respond_to do |format|
       if @tour.update(tour_params)
         format.html { redirect_to @tour, notice: 'Tour was successfully updated.' }
@@ -59,6 +62,27 @@ class ToursController < ApplicationController
       format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def extract_accomodations
+    @accomodation_ids = []
+    params.each do |name, value|
+      if name =~ /accomodation_type_(.+)$/
+        if !params["duration_#{$1}"].blank?
+          Accomodation.create(accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
+        end
+      end
+    end
+  end
+
+  def extract_packages
+    @tour_package = TourPackage.find(params[:tp])
+    @tour.tour_package_id = @tour_package[:id]
+  end
+
+  def extract_dates
+    @tour.start_date = JalaliDate.to_gregorian(params[:start_date_yyyy],params[:start_date_mm],params[:start_date_dd])
+    @tour.end_date = JalaliDate.to_gregorian(params[:end_date_yyyy],params[:end_date_mm],params[:end_date_dd])
   end
 
   private

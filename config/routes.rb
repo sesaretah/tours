@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   post '/airlines', to: "airlines#create"
   post '/hotels', to: "hotels#create"
+  post '/price_types', to: "price_types#create"
 
   get '/uploads/remoted/:id', to: "uploads#remoted"
   get '/tour_packages/upload/:id', to: "tour_packages#upload"

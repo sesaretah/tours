@@ -1,37 +1,48 @@
 <div class='row'>
   <div class="col-lg-4 order-lg-1">
+    <%= render partial: 'tour_packages/tour_package_block', locals: {tour_package: @tour_package}%>
   </div>
   <div class="col-lg-8 order-lg-1">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title"></h3>
         <div class="card-options">
-          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+          <%= link_to new_tour_path(tour_package_id: params[:id]), class:'btn btn-secondary' do%>
+          <i class="fa fa-globe"></i> <%=t :new_tour%>
+          <%end%>
         </div>
       </div>
-      <div class="card-body">
-        <div class='row'>
-          <div class='col-md-12 col-lg-12'>
-                        <div class="form-group">
-              <%= label :tour_package, :title , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.title %></div>
-            </div>
-                        <div class="form-group">
-              <%= label :tour_package, :days , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.days %></div>
-            </div>
-                        <div class="form-group">
-              <%= label :tour_package, :nights , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.nights %></div>
-            </div>
-                        <div class="form-group">
-              <%= label :tour_package, :details , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.details %></div>
-            </div>
-                        <div class="form-group">
-              <%= label :tour_package, :agency_id , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.agency_id %></div>
-            </div>
-                        <div class="form-group">
-              <%= label :tour_package, :uuid , class: "form-label", style: 'color: #7795c1;'%>              <div class="form-control-plaintext"><%= @tour_package.uuid %></div>
-            </div>
-                      </div>
-        </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-outline table-vcenter ">
+          <thead>
+            <tr>
+              <td><%=t :from%></td>
+              <td><%=t :to%></td>
+              <td></td>
+            </tr>
+          </thead>
+        <% for tour in @tour_package.tours%>
+        <tr>
+          <td>
+            <span>
+              <% @jalali = JalaliDate.to_jalali(tour.start_date)%>
+              <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+            </span>
+          </td>
+          <td>
+            <span>
+              <% @jalali = JalaliDate.to_jalali(tour.end_date)%>
+              <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+            </span>
+          </td>
+          <td class="text-right">
+          <%= link_to "/tours/#{tour.id}", class:'btn btn-secondary' do%>
+            <i class="fe fe-play"></i><%=t :show%>
+          <%end%>
+          </td>
+        </tr>
+        <%end%>
+        </table>
       </div>
     </div>
   </div>

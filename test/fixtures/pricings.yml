@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tour_id: 1
+  price_type_id: 1
+  value: 1
+  agency_id: 1
+
+two:
+  tour_id: 1
+  price_type_id: 1
+  value: 1
+  agency_id: 1

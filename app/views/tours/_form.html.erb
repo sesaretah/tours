@@ -1,6 +1,6 @@
 <%= form_for(@tour, html: {class: 'card'}) do |f| %>
 <div class="card-header">
-  <h3 class="card-title"><%=t :new_tour %></h3>
+  <h3 class="card-title"><%=t :tour_form %></h3>
 </div>
 <% if @tour.errors.any? %>
 <div id="error_explanation">
@@ -15,55 +15,156 @@
 <% end %>
 
 <div class="card-body">
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :start_date, class: "form-label" %>
-      <%= f.date_select :start_date , class: "form-control" %>
+  <h5  style="color:#24426c;"><i class="fa fa-calendar" style="vertical-align:-2px;"></i> <%=t :tour_dates%></h5>
+  <hr class="mt-2 mb-2"/>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :start_date, class: "form-label" %>
+        <% if @tour.id == nil%>
+        <% @now = JalaliDate.to_jalali(Time.now)%>
+        <%else%>
+        <% @now = JalaliDate.to_jalali(@tour.start_date)%>
+        <%end%>
+        <div class="row gutters-xs">
+          <div class='col-4'>
+            <%= select_tag  "start_date_dd", options_for_select(1..31, @now.day), {class: "form-control"} %>
           </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :end_date, class: "form-label" %>
-      <%= f.date_select :end_date , class: "form-control" %>
+          <div class='col-4'>
+            <%= select_tag "start_date_mm", options_for_select(1..12, @now.month), {class: "form-control"} %>
           </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :price, class: "form-label" %>
-      <%= f.number_field :price , class: "form-control" %>
+          <div class='col-4'>
+            <%= select_year(@now.year, {:start_year => 1360, :end_year => 1400}, {class: "form-control", :name =>"start_date_yyyy"}) %>
           </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :details, class: "form-label" %>
-      <%= f.text_area :details , class: "form-control" %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :end_date, class: "form-label" %>
+        <% if @tour.id == nil%>
+        <% @now = JalaliDate.to_jalali(Time.now)%>
+        <%else%>
+        <% @now = JalaliDate.to_jalali(@tour.end_date)%>
+        <%end%>
+        <div class="row gutters-xs">
+          <div class='col-4'>
+            <%= select_tag  "end_date_dd", options_for_select(1..31, @now.day), {class: "form-control"} %>
           </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :tour_package_id, class: "form-label" %>
-      <%= f.number_field :tour_package_id , class: "form-control" %>
+          <div class='col-4'>
+            <%= select_tag "end_date_mm", options_for_select(1..12, @now.month), {class: "form-control"} %>
           </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-5">
-    <div class="form-group">
-          <%= f.label :uuid, class: "form-label" %>
-      <%= f.text_field :uuid , class: "form-control" %>
+          <div class='col-4'>
+            <%= select_year(@now.year, {:start_year => @now.year, :end_year => 1410}, {class: "form-control", :name =>"end_date_yyyy"}) %>
           </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="card-footer text-right">
-  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+
+  <h5 style="color:#24426c;"><i class="fa fa-money" style="vertical-align:-2px;"></i> <%=t :prices%></h5>
+  <hr class="mt-2 mb-2"/>
+  <% for price_type in PriceType.all%>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="form-label"><%= price_type.title%></label>
+        <%= number_field_tag "price_#{price_type.id}", nil,class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <%end%>
+
+  <h5 style="color:#24426c;"><i class="fa fa-bed" style="vertical-align:-2px;"></i> <%=t :accomodation%></h5>
+  <hr class="mt-2 mb-4"/>
+  <div class="row text-center small">
+    <div class="col-md-3 mb-1">
+      <%=t :name%>
+    </div>
+    <div class="col-md-2 mb-1">
+      <%=t :duration%>
+    </div>
+  </div>
+  <% 3.times do |i|%>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }), class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= number_field_tag "duration_#{i}", nil,class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <%end%>
+
+  <h5 style="color:#24426c;"><i class="fa fa-bus" style="vertical-align:-2px;"></i> <%=t :transportaton%></h5>
+  <hr class="mt-2 mb-4"/>
+  <div class="row text-center small">
+    <div class="col-md-2 mb-1">
+      <%=t :type%>
+    </div>
+    <div class="col-md-2 mb-1">
+      <%=t :company%>
+    </div>
+    <div class="col-md-2 mb-1">
+      <%=t :transportation_type%>
+    </div>
+    <div class="col-md-2 mb-1">
+      <%=t :transportation_time%>
+    </div>
+    <div class="col-md-2 mb-1">
+      <%=t :details%>
+    </div>
+  </div>
+  <% 3.times do |i|%>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= select_tag "carrier_#{i}", options_for_select(transportations), class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= select_tag "transportation_type_#{i}", options_for_select(Airline.all.collect{ |u| [u.name, u.id] }), class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= select_tag "leg_#{i}", options_for_select(transportation_types), class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-2 text-center" style="direction:ltr;">
+      <div class="form-group mt-1">
+        <%= select_time(Time.now, {time_separator: ':'},{}) %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= text_field_tag :details, nil , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <%end%>
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :details, class: "form-label" %>
+        <%= f.text_area :details , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <%= hidden_field_tag :tp, params[:tour_package_id] %>
+
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+  </div>
 </div>
 <% end %>

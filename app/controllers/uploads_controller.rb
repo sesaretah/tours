@@ -15,6 +15,8 @@ class UploadsController < ApplicationController
   def create
     @upload = Upload.new(upload_params)
     @upload.attachment = params[:file]
+    @item = params[:upload][:uploadable_type].classify.constantize.find(params[:upload][:uploadable_id])
+    @upload.uploadable_id = @item[:id]
     respond_to do |format|
       if @upload.save
         format.json { render :show, status: :created, location: @upload }

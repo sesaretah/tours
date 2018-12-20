@@ -45,7 +45,7 @@ class TourPackagesController < ApplicationController
   def update
     respond_to do |format|
       if @tour_package.update(tour_package_params)
-        if !params['upload'].blank?
+        if params['upload'].blank?
           format.html { redirect_to "/tour_packages/upload/#{@tour_package.id}", notice: 'Tour package was successfully updated.' }
         else
           format.html { redirect_to "/tour_packages", notice: 'Tour package was successfully updated.' }
