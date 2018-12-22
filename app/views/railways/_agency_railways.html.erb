@@ -1,0 +1,28 @@
+<div id='settings-detail'>
+<%= form_tag '/railways', remote: true, method: :post do%>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="form-label"><%=t :railway_name%></label>
+      <%= text_field_tag :name, nil , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="form-label"><%=t :railway_type%></label>
+      <%= select_tag :wagon_type, options_for_select(railway_types) , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label class="form-label"><%=t :number_of_seats%></label>
+      <%= number_field_tag :number_of_seats, nil , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary" style="margin-top:26px"><%=t :submit%></button>
+  </div>
+</div>
+<%end%>
+<%= render partial: 'railways/list'%>
+</div>

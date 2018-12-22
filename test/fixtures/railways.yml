@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  wagon_type: MyString
+  number_of_seats: 1
+  agency_id: 1
+
+two:
+  name: MyString
+  wagon_type: MyString
+  number_of_seats: 1
+  agency_id: 1

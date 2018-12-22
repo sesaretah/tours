@@ -248,6 +248,12 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  railway_name: 'نام شرکت'
+  number_of_seats: 'تعداد صندلی'
+  railway_type: 'نوع قطار'
+  coupe_type: 'کوپه ای'
+  bus_type: 'اتوبوسی'
+  edit: 'ویرایش'
   tour_form: 'فرم تورها '
   name: 'نام'
   duration: 'تعداد شب اقامت '
@@ -285,7 +291,7 @@ fa:
   home_settings: 'تنظیمات صفحه خانه'
   flight_settings: 'تعریف ایرلاین ها'
   hotel_settings: 'تعریف هتل ها'
-  train_settings: 'تعریف قطارها'
+  railways_settings: 'تعریف قطارها'
   mobile_app_management: 'مدیریت اپ موبایل'
   days: 'روز'
   and: 'و'

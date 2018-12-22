@@ -1,0 +1,15 @@
+<div id='airlines-list'>
+  <table class="table table-hover table-outline">
+    <%for railway in Railway.all%>
+    <tr>
+      <td><%= railway.name%></td>
+      <td>
+        <div class="tag tag-dark" style='vertical-align: 6px;'>
+          <%= railway.tours.count %>
+          <span class="tag-addon tag-success"><i class="fe fe-box" style="vertical-align: -3px;"></i></span>
+        </div>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+</div>

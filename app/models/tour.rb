@@ -1,7 +1,13 @@
 class Tour < ActiveRecord::Base
   belongs_to :airline
-  belongs_to :hotel
   belongs_to :tour_packages
+
+  has_many :accomodations, :dependent => :destroy
+  has_many :hotels, :through => :accomodations
+
+  has_many :transportations, :dependent => :destroy
+  has_many :airlines, :through => :transportations
+  has_many :railways, :through => :transportations
 
   has_many :price_types, :through => :pricings
   has_many :pricings, dependent: :destroy
@@ -14,8 +20,8 @@ class Tour < ActiveRecord::Base
     self.uuid = SecureRandom.uuid
   end
 
-  def id
-    self.uuid
+  def rawid
+    self[:id]
   end
 
   def self.find(uuid)

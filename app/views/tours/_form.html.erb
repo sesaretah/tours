@@ -68,11 +68,16 @@
   <h5 style="color:#24426c;"><i class="fa fa-money" style="vertical-align:-2px;"></i> <%=t :prices%></h5>
   <hr class="mt-2 mb-2"/>
   <% for price_type in PriceType.all%>
+  <% @pricing = Pricing.where(price_type_id: price_type.id, tour_id: @tour.id).first%>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <label class="form-label"><%= price_type.title%></label>
-        <%= number_field_tag "price_#{price_type.id}", nil,class: "form-control" %>
+        <% if @pricing.blank?%>
+          <%= number_field_tag "price_#{price_type.id}", nil,class: "form-control" %>
+        <%else%>
+          <%= number_field_tag "price_#{price_type.id}", @pricing.value,class: "form-control" %>
+        <%end%>
       </div>
     </div>
   </div>
@@ -89,15 +94,24 @@
     </div>
   </div>
   <% 3.times do |i|%>
+  <% @accomodation = Accomodation.where(tour_id: @tour.id).limit(1).offset(i).first%>
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }), class: "form-control" %>
+        <% if @accomodation.blank?%>
+        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
+        <%else%>
+        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }, @accomodation.id), {include_blank: true, class: "form-control"} %>
+        <%end%>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
+        <% if @accomodation.blank?%>
         <%= number_field_tag "duration_#{i}", nil,class: "form-control" %>
+        <%else%>
+        <%= number_field_tag "duration_#{i}", @accomodation.nights,class: "form-control" %>
+        <%end%>
       </div>
     </div>
   </div>
@@ -131,7 +145,7 @@
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <%= select_tag "transportation_type_#{i}", options_for_select(Airline.all.collect{ |u| [u.name, u.id] }), class: "form-control" %>
+        <%= select_tag "transportation_id_#{i}", options_for_select(Airline.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
       </div>
     </div>
     <div class="col-md-2">

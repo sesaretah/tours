@@ -16,6 +16,11 @@ $("#hotels-nav").addClass('active');
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'price_types/agency_price_types')) %>");
 $("#price_types-nav").addClass('active');
 <%end%>
+
+<% if @section == 'railways'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'railways/agency_railways')) %>");
+$("#railways-nav").addClass('active');
+<%end%>
 <% if @section == 'slider'%>
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'home/slide_settings')) %>");
 $("#slider-nav").addClass('active');

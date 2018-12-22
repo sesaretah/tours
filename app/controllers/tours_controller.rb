@@ -30,7 +30,9 @@ class ToursController < ApplicationController
     respond_to do |format|
       if @tour.save
         extract_accomodations
-        format.html { redirect_to @tour, notice: 'Tour was successfully created.' }
+        extract_prices
+        extract_transportations
+        format.html { redirect_to "/tours/#{@tour.uuid}", notice: 'Tour was successfully created.' }
         format.json { render :show, status: :created, location: @tour }
       else
         format.html { render :new }
@@ -45,7 +47,7 @@ class ToursController < ApplicationController
     extract_dates
     respond_to do |format|
       if @tour.update(tour_params)
-        format.html { redirect_to @tour, notice: 'Tour was successfully updated.' }
+        format.html { redirect_to "/tours/#{@tour.uuid}", notice: 'Tour was successfully updated.' }
         format.json { render :show, status: :ok, location: @tour }
       else
         format.html { render :edit }
@@ -64,12 +66,28 @@ class ToursController < ApplicationController
     end
   end
 
+  def extract_transportations
+    params.each do |name, value|
+      if name =~ /carrier_(.+)$/
+        Transportation.create(transportable_type: value.classify.constantize, transportable_id: params["transportation_id_#{$1}"] , tour_id: @tour.id, leg: params["leg_#{$1}"])
+      end
+    end
+  end
+
+  def extract_prices
+    params.each do |name, value|
+      if name =~ /price_(.+)$/
+        Pricing.create(tour_id: @tour.rawid,  price_type_id: $1, value: value)
+      end
+    end
+  end
+
   def extract_accomodations
     @accomodation_ids = []
     params.each do |name, value|
       if name =~ /accomodation_type_(.+)$/
         if !params["duration_#{$1}"].blank?
-          Accomodation.create(accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
+          Accomodation.create(tour_id: @tour.rawid, accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
         end
       end
     end

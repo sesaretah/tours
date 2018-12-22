@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/settings', to: "settings#index"
 
   post '/airlines', to: "airlines#create"
+  post '/railways', to: "railways#create"
   post '/hotels', to: "hotels#create"
   post '/price_types', to: "price_types#create"
 
