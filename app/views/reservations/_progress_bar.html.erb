@@ -1,0 +1,7 @@
+<div class='pcontainer'>
+  <ul class="progressbar">
+    <li <% if active.include?('tour_selection')%> class="active" <%end%>><%=t :tour_selection%></li>
+    <li <% if active.include?('tour_passengers')%> class="active" <%end%>><%=t :tour_passengers%></li>
+    <li <% if active.include?('review_reservation')%> class="active" <%end%>><%=t :review_reservation%></li>
+  </ul>
+</div>

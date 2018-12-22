@@ -35,6 +35,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    ar-uuid (0.2.0)
+      activerecord
     arel (6.0.4)
     autoprefixer-rails (9.4.3)
       execjs
@@ -213,6 +215,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ar-uuid
   bootstrap (~> 4.1.1)
   byebug
   ckeditor

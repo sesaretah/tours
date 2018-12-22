@@ -1,0 +1,25 @@
+<div class='row mt-4'>
+  <h5 style="color:#24426c;"><i class="fa fa-bed" style="vertical-align:-2px;"></i> <%=t :accomodation%></h5>
+  <div class='col-md-12 col-lg-12'>
+    <div class="table-responsive">
+      <table class="table card-table table-striped table-vcenter">
+        <thead style='border: 1px solid #80808057;'>
+          <tr>
+            <td><%=t :hotel_name%></td>
+            <td><%=t :stars%></td>
+            <td><%=t :city%></td>
+          </tr>
+        </thead>
+        <tbody style='border: 1px solid #80808057;'>
+          <% for hotel in tour.hotels%>
+          <tr>
+            <td><%= hotel.name%></td>
+            <td><%= hotel.stars%></td>
+            <td><%= hotel.city%></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

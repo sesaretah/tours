@@ -1,0 +1,17 @@
+<div class='row'>
+  <h5 style="color:#24426c;"><i class="fa fa-money" style="vertical-align:-2px;"></i> <%=t :prices%></h5>
+  <div class='col-md-12 col-lg-12'>
+    <div class="table-responsive">
+      <table class="table card-table table-striped table-vcenter">
+        <tbody style='border: 1px solid #80808057;'>
+          <% for pricing in tour.pricings%>
+          <tr>
+            <td><%= pricing.price_type.title%></td>
+            <td><%= pricing.value%></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

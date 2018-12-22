@@ -1,0 +1,25 @@
+<div class='row mt-4'>
+  <h5 style="color:#24426c;"><i class="fa fa-plane" style="vertical-align:-2px;"></i> <%=t :transportaton%></h5>
+  <div class='col-md-12 col-lg-12'>
+    <div class="table-responsive">
+      <table class="table card-table table-striped table-vcenter">
+        <thead style='border: 1px solid #80808057;'>
+          <tr>
+            <td><%=t :type%></td>
+            <td><%=t :company%></td>
+            <td><%=t :transportation_type%></td>
+          </tr>
+        </thead>
+        <tbody style='border: 1px solid #80808057;'>
+          <% for transportation in tour.transportations%>
+          <tr>
+            <td><%=t transportation.transportable_type.downcase%></td>
+            <td><%= transportation.transportable_type.classify.constantize.find(transportation.transportable_id).name%></td>
+            <td><%=t transportation.leg.downcase%></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

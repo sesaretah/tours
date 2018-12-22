@@ -231,11 +231,11 @@ fa:
             title: 'عنوان '
             days: 'تعداد روز'
             nights: 'تعداد شب'
-            details: 'شرح'
+            details: 'توضیحات'
         tour:
-          start_date: 'از'
-          end_date: 'تا'
-          details: 'شرح '
+          start_date: 'رفت'
+          end_date: 'برگشت '
+          details: 'توضیحات'
         user:
             username: 'تلفن همراه کاربر'
             mobile: 'شماره تلفن همراه'
@@ -248,6 +248,12 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  tour_selection: 'انتخاب تور'
+  tour_passengers: 'اطلاعات مسافر'
+  review_reservation: 'بررسی و تایید'
+  reservation: 'رزرو '
+  price_range: 'بازه قیمت'
+  add_new_tour_package: 'پکیج تور جدید '
   railway_name: 'نام شرکت'
   number_of_seats: 'تعداد صندلی'
   railway_type: 'نوع قطار'
@@ -265,6 +271,9 @@ fa:
   departure: 'رفت'
   arrival: 'برگشت'
   surfing: 'گشت'
+  airlines: 'هوایی'
+  railways: 'ریلی'
+  buses: 'زمینی'
   airline: 'هوایی'
   railway: 'ریلی'
   bus: 'زمینی'

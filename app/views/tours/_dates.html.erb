@@ -1,0 +1,24 @@
+<div class='row'>
+  <h5  style="color:#24426c;"><i class="fa fa-calendar" style="vertical-align:-2px;"></i> <%=t :tour_dates%></h5>
+  <hr class="mt-2 mb-2"/>
+  <div class='col-md-12 col-lg-12'>
+    <div class="form-group">
+      <%= label :tour, :start_date , class: "form-label", style: 'color: #7795c1;'%>
+      <div class="form-control-plaintext">
+        <span>
+          <% @jalali = JalaliDate.to_jalali(tour.start_date)%>
+          <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label :tour, :end_date , class: "form-label", style: 'color: #7795c1;'%>
+      <div class="form-control-plaintext">
+        <span>
+          <% @jalali = JalaliDate.to_jalali(tour.end_date)%>
+          <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

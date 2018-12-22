@@ -10,6 +10,5 @@ class CreateTourPackages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :tour_packages, :uuid, unique: true
   end
 end

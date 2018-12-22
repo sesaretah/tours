@@ -1,0 +1,22 @@
+<%= render partial: 'reservations/progress_bar', locals: {active: ['tour_selection']}%>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <%= render partial: 'tours/dates', locals:{tour: @tour}%>
+            <%= render partial: 'tours/pricing', locals:{tour: @tour}%>
+          </div>
+          <div class="col-md-6">
+            <%= render partial: 'tours/accomodations', locals:{tour: @tour}%>
+            <%= render partial: 'tours/transportations', locals:{tour: @tour}%>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

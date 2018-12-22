@@ -1,4 +1,5 @@
 class Tour < ActiveRecord::Base
+  self.primary_key = 'uuid'
   belongs_to :airline
   belongs_to :tour_packages
 
@@ -20,8 +21,8 @@ class Tour < ActiveRecord::Base
     self.uuid = SecureRandom.uuid
   end
 
-  def rawid
-    self[:id]
+  def id
+    self.uuid
   end
 
   def self.find(uuid)

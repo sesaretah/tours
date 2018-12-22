@@ -16,6 +16,5 @@ class CreateAgencies < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :agencies, :uuid, unique: true
   end
 end

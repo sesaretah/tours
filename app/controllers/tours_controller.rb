@@ -47,6 +47,9 @@ class ToursController < ApplicationController
     extract_dates
     respond_to do |format|
       if @tour.update(tour_params)
+        extract_accomodations
+        extract_prices
+        extract_transportations
         format.html { redirect_to "/tours/#{@tour.uuid}", notice: 'Tour was successfully updated.' }
         format.json { render :show, status: :ok, location: @tour }
       else
@@ -67,27 +70,37 @@ class ToursController < ApplicationController
   end
 
   def extract_transportations
+    for transportation in @tour.transportations
+      transportation.destroy
+    end
     params.each do |name, value|
       if name =~ /carrier_(.+)$/
-        Transportation.create(transportable_type: value.classify.constantize, transportable_id: params["transportation_id_#{$1}"] , tour_id: @tour.id, leg: params["leg_#{$1}"])
+        if !value.blank?
+          Transportation.create(transportable_type: value.singularize.classify.constantize, transportable_id: params["transportation_id_#{$1}"] , tour_id: @tour.id, leg: params["leg_#{$1}"])
+        end
       end
     end
   end
 
   def extract_prices
+    for pricing in @tour.pricings
+      pricing.destroy
+    end
     params.each do |name, value|
       if name =~ /price_(.+)$/
-        Pricing.create(tour_id: @tour.rawid,  price_type_id: $1, value: value)
+        Pricing.create(tour_id: @tour.id,  price_type_id: $1, value: value)
       end
     end
   end
 
   def extract_accomodations
-    @accomodation_ids = []
+    for accomodation in @tour.accomodations
+      accomodation.destroy
+    end
     params.each do |name, value|
       if name =~ /accomodation_type_(.+)$/
         if !params["duration_#{$1}"].blank?
-          Accomodation.create(tour_id: @tour.rawid, accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
+          Accomodation.create(tour_id: @tour.id, accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
         end
       end
     end
@@ -95,7 +108,7 @@ class ToursController < ApplicationController
 
   def extract_packages
     @tour_package = TourPackage.find(params[:tp])
-    @tour.tour_package_id = @tour_package[:id]
+    @tour.tour_package_id = @tour_package.id
   end
 
   def extract_dates

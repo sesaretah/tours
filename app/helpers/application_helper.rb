@@ -3,9 +3,9 @@ module ApplicationHelper
   def transportations
     @options = [
       ["",""],
-      [t(:airline), 'Airline'],
-      [t(:railway) , 'Railway'],
-      [t(:bus) , 'Bus']
+      [t(:airlines), 'airlines'],
+      [t(:railways) , 'railways'],
+      [t(:buses) , 'buses']
     ]
     return @options
   end

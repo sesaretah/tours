@@ -16,32 +16,69 @@
         <table class="table table-hover table-outline table-vcenter ">
           <thead>
             <tr>
-              <td><%=t :from%></td>
-              <td><%=t :to%></td>
+              <td><%=t :departure%></td>
+              <td><%=t :arrival%></td>
+              <td><%=t :price_range%></td>
+              <td><%=t :accomodation%></td>
               <td></td>
             </tr>
           </thead>
-        <% for tour in @tour_package.tours%>
-        <tr>
-          <td>
-            <span>
-              <% @jalali = JalaliDate.to_jalali(tour.start_date)%>
-              <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
-            </span>
-          </td>
-          <td>
-            <span>
-              <% @jalali = JalaliDate.to_jalali(tour.end_date)%>
-              <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
-            </span>
-          </td>
-          <td class="text-right">
-          <%= link_to "/tours/#{tour.uuid}", class:'btn btn-secondary' do%>
-            <i class="fe fe-play"></i><%=t :show%>
+          <% for tour in @tour_package.tours%>
+          <tr>
+            <td>
+              <div>
+                <% @jalali = JalaliDate.to_jalali(tour.start_date)%>
+                <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+              </div>
+              <div class="small text-muted">
+                <% @transportation = tour.transportations.where(leg: "Departure").order(:created_at).first%>
+                <% if !@transportation.blank?%>
+                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name%>
+                <%end%>
+              </div>
+            </td>
+            <td>
+              <div>
+                <% @jalali = JalaliDate.to_jalali(tour.end_date)%>
+                <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+              </div>
+              <div class="small text-muted">
+                <% @transportation = tour.transportations.where(leg: "Arrival").order(:created_at).first%>
+                <% if !@transportation.blank?%>
+                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name%>
+                <%end%>
+              </div>
+            </td>
+            <td>
+              <%@upper_price = tour.pricings.order('value desc').limit(2).first %>
+              <% if !@upper_price.blank?%>
+              <strong><%= @upper_price.value%></strong>
+              <%end%>
+              <%@down_price = tour.pricings.order('value desc').limit(2).last %>
+              <% if !@down_price.blank?%>
+              -<strong><%= @down_price.value%></strong>
+              <%end%>
+            </td>
+            <td>
+              <%@accomodation1 = tour.accomodations.order('nights desc').limit(2).first %>
+              <% if !@accomodation1.blank?%>
+              <div class="small text-muted"><%= Hotel.find(@accomodation1.accomodable_id).name%>  <%=raw Hotel.find(@accomodation1.accomodable_id).star%></div>
+              <%end%>
+              <%@accomodation2 = tour.accomodations.order('nights desc').limit(2).last %>
+              <% if !@accomodation1.blank?%>
+              <div class="small text-muted"><%= Hotel.find(@accomodation2.accomodable_id).name%> <%=raw Hotel.find(@accomodation2.accomodable_id).star%></div>
+              <%end%>
+            </td>
+            <td class="text-right">
+              <%= link_to "/reservations/new?tour_id=#{tour.id}", class:'btn btn-sm btn-success' do%>
+              <i class="fe fe-plus-circle" style="vertical-align: -3px;"></i> <%=t :reservation%>
+              <%end%>
+              <%= link_to "/tours/#{tour.uuid}", class:'btn btn-sm btn-secondary' do%>
+              <i class="fe fe-play"></i><%=t :show%>
+              <%end%>
+            </td>
+          </tr>
           <%end%>
-          </td>
-        </tr>
-        <%end%>
         </table>
       </div>
     </div>

@@ -3,6 +3,8 @@
     <%for railway in Railway.all%>
     <tr>
       <td><%= railway.name%></td>
+      <td><%=t railway.wagon_type%></td>
+      <td><%= railway.number_of_seats%></td>
       <td>
         <div class="tag tag-dark" style='vertical-align: 6px;'>
           <%= railway.tours.count %>

@@ -18,4 +18,9 @@ Rails.application.routes.draw do
 
   get '/uploads/remoted/:id', to: "uploads#remoted"
   get '/tour_packages/upload/:id', to: "tour_packages#upload"
+
+  get '/railways/options', to: "railways#options"
+  get '/airlines/options', to: "airlines#options"
+
+  get '/reservations/new', to: "reservations#new"
 end

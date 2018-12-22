@@ -1,9 +1,10 @@
 class TourPackage < ActiveRecord::Base
+  self.primary_key = 'uuid'
   belongs_to :agency
   has_many :tours
 
   def image(style)
-    @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self[:id], attachment_type: 'tour_package_attachment').first
+    @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self.id, attachment_type: 'tour_package_attachment').first
     if !@upload.blank?
       return @upload.attachment(style)
     else
