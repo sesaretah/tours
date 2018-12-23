@@ -1,0 +1,92 @@
+<%= form_for(passenger, html:{class: 'card'}, remote: true) do |f| %>
+<div class="card-header">
+<%=t :passenger_info%>
+</div>
+<div class="card-body">
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :name, class: "form-label" %>
+          <%= f.text_field :name , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :surename, class: "form-label" %>
+          <%= f.text_field :surename , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :father_name, class: "form-label" %>
+          <%= f.text_field :father_name , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :sex, class: "form-label" %>
+          <%= f.text_field :sex , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :birthdate, class: "form-label" %>
+          <%= f.date_select :birthdate , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :ssn, class: "form-label" %>
+          <%= f.text_field :ssn , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :place_of_birth, class: "form-label" %>
+          <%= f.text_field :place_of_birth , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :passport_no, class: "form-label" %>
+          <%= f.text_field :passport_no , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :nation_id, class: "form-label" %>
+          <%= f.number_field :nation_id , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<%= hidden_field_tag :tour_id, @tour.id%>
+<div class="card-footer text-right">
+  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+</div>
+<% end %>

@@ -1,0 +1,45 @@
+<div class="row row-cards">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="card">
+      <table class="table card-table table-vcenter">
+        <tbody>
+          <% @passengers.each do |passenger| %>
+          <tr>
+                        <td><%= passenger.name %></td>
+                        <td><%= passenger.surename %></td>
+                        <td><%= passenger.business_id %></td>
+                        <td><%= passenger.sex %></td>
+                        <td><%= passenger.tel %></td>
+                        <td><%= passenger.birthdate %></td>
+                        <td><%= passenger.ssn %></td>
+                        <td><%= passenger.place_of_birth %></td>
+                        <td><%= passenger.passport_no %></td>
+                        <td><%= passenger.nation_id %></td>
+                        <td><%= link_to t(:show), passenger %></td>
+            <td><%= link_to t(:edit), edit_passenger_path(passenger) %></td>
+            <td><%= link_to t(:destroy), passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

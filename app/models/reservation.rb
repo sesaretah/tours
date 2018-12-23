@@ -1,6 +1,7 @@
 class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :tour
+  belongs_to :passenger
 
   before_create :set_uuid
   def set_uuid

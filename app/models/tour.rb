@@ -13,7 +13,7 @@ class Tour < ActiveRecord::Base
   has_many :price_types, :through => :pricings
   has_many :pricings, dependent: :destroy
 
-  has_many :users, as: :passengers, :through => :reservations
+  has_many :passengers, :through => :reservations
   has_many :reservations, dependent: :destroy
 
   before_create :set_uuid

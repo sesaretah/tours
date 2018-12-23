@@ -216,6 +216,17 @@ fa:
             rank: 'مرتبه علمی'
             digest_email: 'ایمیل آگاهسازی'
             email: 'ایمیل'
+        passenger:
+            name: 'نام'
+            surename: 'نام خانوادگی'
+            birthdate: 'تاریخ تولد'
+            sex: 'جنسیت'
+            tel: 'شماره تلفن'
+            ssn: 'کد ملی'
+            place_of_birth: 'محل تولد'
+            nation_id: 'ملیت'
+            passport_no: 'شماره گذرنامه '
+            father_name: 'نام پدر'
         agency:
             name: 'نام شرکت'
             subdomain: 'دامنه'
@@ -248,6 +259,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  passenger_info: 'اطلاعات مسافر'
+  verify_and_proceed: 'تایید و ادامه'
   tour_selection: 'انتخاب تور'
   tour_passengers: 'اطلاعات مسافر'
   review_reservation: 'بررسی و تایید'

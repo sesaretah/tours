@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181222090119) do
+ActiveRecord::Schema.define(version: 20181222162937) do
 
   create_table "accomodations", force: :cascade do |t|
     t.string   "accomodable_type", limit: 255
@@ -67,6 +67,26 @@ ActiveRecord::Schema.define(version: 20181222090119) do
 
   add_index "hotels", ["uuid"], name: "index_hotels_on_uuid", unique: true, using: :btree
 
+  create_table "passengers", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "surename",       limit: 255
+    t.string   "business_id",    limit: 255
+    t.string   "sex",            limit: 255
+    t.string   "tel",            limit: 255
+    t.date     "birthdate"
+    t.string   "ssn",            limit: 255
+    t.string   "place_of_birth", limit: 255
+    t.string   "passport_no",    limit: 255
+    t.integer  "nation_id",      limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "father_name",    limit: 255
+    t.string   "uuid",           limit: 255
+  end
+
+  add_index "passengers", ["business_id"], name: "index_passengers_on_business_id", using: :btree
+  add_index "passengers", ["uuid"], name: "index_passengers_on_uuid", unique: true, using: :btree
+
   create_table "price_types", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.datetime "created_at",             null: false
@@ -102,13 +122,17 @@ ActiveRecord::Schema.define(version: 20181222090119) do
   add_index "railways", ["uuid"], name: "index_railways_on_uuid", unique: true, using: :btree
 
   create_table "reservations", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "tour_id",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",      limit: 4
+    t.string   "tour_id",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "passenger_id", limit: 255
+    t.string   "uuid",         limit: 255
   end
 
+  add_index "reservations", ["passenger_id"], name: "index_reservations_on_passenger_id", using: :btree
   add_index "reservations", ["tour_id"], name: "index_reservations_on_tour_id", using: :btree
+  add_index "reservations", ["uuid"], name: "index_reservations_on_uuid", unique: true, using: :btree
 
   create_table "tour_packages", force: :cascade do |t|
     t.string   "title",      limit: 255

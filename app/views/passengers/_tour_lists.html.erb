@@ -1,0 +1,26 @@
+<div id="tour-list">
+  <div class="table-responsive">
+    <table class="table table-hover table-outline table-vcenter ">
+      <thead>
+        <tr>
+          <td><%=t :name%></td>
+          <td><%=t :surename%></td>
+          <td><%=t :father_name%></td>
+          <td><%=t :birthdate%></td>
+          <td><%=t :passport_no%></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for passenger in tour.passengers%>
+        <tr>
+          <td><%= passenger.name%></td>
+          <td><%= passenger.surename%></td>
+          <td><%= passenger.father_name%></td>
+          <td><%= passenger.birthdate%></td>
+          <td><%= passenger.passport_no%></td>
+        </tr>
+        <%end%>
+      </tabody>
+    </table>
+  </div>
+</div>

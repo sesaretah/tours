@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :passengers
   devise_for :users, :controllers => {:registrations => "registrations", sessions: "sessions"}
   resources :agencies
   resources :tour_packages
@@ -23,4 +24,5 @@ Rails.application.routes.draw do
   get '/airlines/options', to: "airlines#options"
 
   get '/reservations/new', to: "reservations#new"
+  get '/reservations/passengers', to: "reservations#passengers"
 end

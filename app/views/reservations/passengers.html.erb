@@ -1,0 +1,24 @@
+<%= render partial: 'reservations/progress_bar', locals: {active: ['tour_selection', 'tour_passengers']}%>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render partial: '/passengers/form', locals: {passenger: Passenger.new}%>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <%= render partial: '/passengers/tour_lists', locals: {tour: @tour}%>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+        <%= link_to "/reservations/passengers?tour_id=#{params[:tour_id]}", class: 'btn btn-success' do%>
+        <%=t :verify_and_proceed%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
