@@ -1,25 +1,35 @@
 <div id='hotels-list'>
-  <table class="table table-hover table-outline">
-    <thead>
-      <tr>
-        <td><%=t :hotel_name%></td>
-        <td><%=t :stars%></td>
-        <td><%=t :city%></td>
-        <td><%=t :number_of_tours%></td>
-      </tr>
-    </thead>
-    <%for hotel in Hotel.all%>
-    <tr>
-      <td><%= hotel.name%></td>
-      <td><%= hotel.stars%></td>
-      <td><%= hotel.city%></td>
-      <td>
-        <div class="tag tag-dark" style='vertical-align: 6px;'>
-          <%= hotel.tours.count %>
-          <span class="tag-addon tag-success"><i class="fe fe-box" style="vertical-align: -3px;"></i></span>
-        </div>
-      </td>
-    </tr>
-    <%end%>
-  </table>
+  <%for hotel in Hotel.all%>
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-hover table-outline card-table">
+        <tr>
+          <td><%=t :hotel_name%></td>
+          <td><%= hotel.name%></td>
+        </tr>
+        <tr>
+          <td><%=t :stars%></td>
+          <td><%= hotel.stars%></td>
+        </tr>
+        <tr>
+          <td><%=t :city%></td>
+          <td><%= hotel.city%></td>
+        </tr>
+        <tr>
+          <td><%=t :number_of_tours%></td>
+          <td>
+            <div class="tag tag-dark" style='vertical-align: 6px;'>
+              <%= hotel.tours.count %>
+              <span class="tag-addon tag-success"><i class="fe fe-box" style="vertical-align: -3px;"></i></span>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+    <div class="col-md-8">
+      <%= render partial: 'uploads/upload_form', locals: {id: hotel.id, ratio: '4/3', class_name: 'Hotel', type:'hotel_pictures'}%>
+    </div>
+  </div>
+  <%end%>
 </div>

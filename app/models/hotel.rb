@@ -2,6 +2,7 @@ class Hotel < ActiveRecord::Base
   self.primary_key = 'uuid'
   has_many :accomodations, :as => :accomodable, :dependent => :destroy
   has_many :tours, :through => :accomodations
+  has_many :uploads, :as => :uploadable, :dependent => :destroy
 
   before_create :set_uuid
   def set_uuid

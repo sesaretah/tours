@@ -1,4 +1,4 @@
-<div id="myModal" class="modal fade" role="dialog">
+<div id="modal_<%= id.last(5)%>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,33 +6,33 @@
         <h4 class="modal-title"><%=t :crop_image%></h4>
       </div>
       <div class="modal-body">
-        <img id="target" for="" src=""/>
-        <input id="crop_x" name="upload[crop_x]" type="hidden" value="">
-        <input id="crop_y" name="upload[crop_y]" type="hidden" value="">
-        <input id="crop_w" name="upload[crop_w]" type="hidden" value="">
-        <input id="crop_h" name="upload[crop_h]" type="hidden" value="">
+        <img id="target_<%= id.last(5)%>" for="" src=""/>
+        <input id="crop_x_<%= id.last(5)%>" name="upload[crop_x]" type="hidden" value="">
+        <input id="crop_y_<%= id.last(5)%>" name="upload[crop_y]" type="hidden" value="">
+        <input id="crop_w_<%= id.last(5)%>" name="upload[crop_w]" type="hidden" value="">
+        <input id="crop_h_<%= id.last(5)%>" name="upload[crop_h]" type="hidden" value="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="send()"><%=t :submit%></button>
+        <button type="button" class="btn btn-default" onclick="send_<%= id.last(5)%>()"><%=t :submit%></button>
       </div>
     </div>
   </div>
 </div>
 <script>
-function send(){
+function send_<%= id.last(5)%>(){
   $.ajax({
     type: "PATCH",
     dataType: 'JSON',
-    url: '/uploads/'+ $('#target').attr('for'),
-    data: {authenticity_token: window._token, 'upload[crop_x]': $('#crop_x').val(), 'upload[crop_y]': $('#crop_y').val(), 'upload[crop_w]': $('#crop_w').val(), 'upload[crop_h]': $('#crop_h').val()},
+    url: '/uploads/'+ $('#target_<%= id.last(5)%>').attr('for'),
+    data: {authenticity_token: window._token, 'upload[crop_x]': $('#crop_x_<%= id.last(5)%>').val(), 'upload[crop_y]': $('#crop_y_<%= id.last(5)%>').val(), 'upload[crop_w]': $('#crop_w_<%= id.last(5)%>').val(), 'upload[crop_h]': $('#crop_h_<%= id.last(5)%>').val()},
     success: function(){
-      $('#target').attr('src', '');
-      $('#myModal').modal('toggle');
+      $('#target_<%= id.last(5)%>').attr('src', '');
+      $('#modal_<%= id.last(5)%>').modal('toggle');
     }
   });
 }
 </script>
-<%= form_for(Upload.new, html: {class: 'dropzone'}) do |f| %>
+<%= form_for(Upload.new, html: {id: "new_upload_#{id.last(5)}", class: 'dropzone'}) do |f| %>
   <%= f.hidden_field :uploadable_type, value: class_name%>
   <%= f.hidden_field :uploadable_id, value: id%>
   <%= f.hidden_field :attachment_type, value: type%>
@@ -48,7 +48,7 @@ function send(){
   <script>
   Dropzone.autoDiscover = false;
   var jcrop_api;
-  $("#new_upload").dropzone({
+  $("#new_upload_<%= id.last(5)%>").dropzone({
     dictDefaultMessage : "<%=t :drop_files_here_to_upload%>",
     dictRemoveFile : "<%=t :remove_file %>",
     acceptedFiles : '.docx,.doc,.pdf,.txt, .png,.jpg,.jpeg',
@@ -62,15 +62,15 @@ function send(){
     },
     init: function () {
       this.on("success", function(file, responseText) {
-        $('#myModal').modal('show');
-        $('#target').attr('src', responseText.image);
-        $('#target').attr('for', responseText.id);
+        $('#modal_<%= id.last(5)%>').modal('show');
+        $('#target_<%= id.last(5)%>').attr('src', responseText.image);
+        $('#target_<%= id.last(5)%>').attr('for', responseText.id);
         $('#attachments').val($('#attachments').val() + ',' + responseText.id);
         if(jcrop_api){
           jcrop_api.destroy();
         }
         $(function() {
-          $('#target').Jcrop({
+          $('#target_<%= id.last(5)%>').Jcrop({
             onChange: update_crop,
             onSelect: update_crop,
             setSelect: [0, 0, 500, 500],
@@ -80,10 +80,10 @@ function send(){
 
         function update_crop(coords) {
           var ratio = responseText.ratio
-          $('#crop_x').val(Math.floor(coords.x * ratio));
-          $('#crop_y').val(Math.floor(coords.y * ratio));
-          $('#crop_w').val(Math.floor(coords.w * ratio));
-          $('#crop_h').val(Math.floor(coords.h * ratio));
+          $('#crop_x_<%= id.last(5)%>').val(Math.floor(coords.x * ratio));
+          $('#crop_y_<%= id.last(5)%>').val(Math.floor(coords.y * ratio));
+          $('#crop_w_<%= id.last(5)%>').val(Math.floor(coords.w * ratio));
+          $('#crop_h_<%= id.last(5)%>').val(Math.floor(coords.h * ratio));
         }
         file.id = responseText.id;
       });
