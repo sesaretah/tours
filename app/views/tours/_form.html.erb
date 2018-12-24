@@ -1,5 +1,5 @@
-
-<%= form_for(@tour, html: {class: 'card'}) do |f| %>
+<div class="card">
+<%= form_for(@tour) do |f| %>
 <div class="card-header">
   <h3 class="card-title"><%=t :tour_form %></h3>
 </div>
@@ -100,10 +100,10 @@
     <div class="col-md-3">
       <div class="form-group">
         <% if @accomodation.blank?%>
-          <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
+        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
         <%else%>
-          <%  @hotel = Hotel.find(@accomodation.accomodable_id)%>
-          <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }, @hotel.id), {include_blank: true, class: "form-control"} %>
+        <%  @hotel = Hotel.find(@accomodation.accomodable_id)%>
+        <%= select_tag "accomodation_type_#{i}", options_for_select(Hotel.all.collect{ |u| [u.name, u.id] }, @hotel.id), {include_blank: true, class: "form-control"} %>
         <%end%>
       </div>
     </div>
@@ -144,27 +144,27 @@
     <div class="col-md-2">
       <div class="form-group">
         <%  if @transportation.blank?%>
-          <%= select_tag "carrier_#{i}", options_for_select(transportations), {class: "form-control transport" } %>
+        <%= select_tag "carrier_#{i}", options_for_select(transportations), {class: "form-control transport" } %>
         <%else%>
-          <%= select_tag "carrier_#{i}", options_for_select(transportations, @transportation.transportable_type.downcase.pluralize), {class: "form-control transport" } %>
+        <%= select_tag "carrier_#{i}", options_for_select(transportations, @transportation.transportable_type.downcase.pluralize), {class: "form-control transport" } %>
         <%end%>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
         <%  if @transportation.blank?%>
-          <%= select_tag "transportation_id_#{i}", options_for_select(Airline.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
+        <%= select_tag "transportation_id_#{i}", options_for_select(Airline.all.collect{ |u| [u.name, u.id] }), {include_blank: true, class: "form-control"} %>
         <% else%>
-          <%= select_tag "transportation_id_#{i}", options_for_select(@transportation.transportable_type.classify.constantize.all.collect{ |u| [u.name, u.id] }, @transportation.transportable_id), {include_blank: true, class: "form-control"} %>
+        <%= select_tag "transportation_id_#{i}", options_for_select(@transportation.transportable_type.classify.constantize.all.collect{ |u| [u.name, u.id] }, @transportation.transportable_id), {include_blank: true, class: "form-control"} %>
         <%end%>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
         <%  if @transportation.blank?%>
-          <%= select_tag "leg_#{i}", options_for_select(transportation_types), class: "form-control" %>
+        <%= select_tag "leg_#{i}", options_for_select(transportation_types), class: "form-control" %>
         <%else%>
-          <%= select_tag "leg_#{i}", options_for_select(transportation_types, @transportation.leg), class: "form-control" %>
+        <%= select_tag "leg_#{i}", options_for_select(transportation_types, @transportation.leg), class: "form-control" %>
         <%end%>
       </div>
     </div>
@@ -207,8 +207,21 @@
 
   <%= hidden_field_tag :tp, params[:tour_package_id] %>
   <%= hidden_field_tag :id, params[:id] %>
+  <%= hidden_field_tag :attachments, ''%>
+  <% end %>
+  <h5 style="color:#24426c;"><i class="fa fa-paperclip" style="vertical-align:-2px;"></i> <%=t :pictures%></h5>
+  <hr class="mt-2 mb-4"/>
+  <% if @tour.id == nil%>
+    <%= render partial: 'uploads/upload_form', locals: {id: 0, ratio: '4/3', class_name: 'Tour', type:'tour_pictures'}%>
+  <%else%>
+    <%= render partial: 'uploads/upload_form', locals: {id: @tour.id, ratio: '4/3', class_name: 'Tour', type:'tour_pictures'}%>
+  <%end%>
   <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+    <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>
   </div>
+  <script>
+  $( "#submit-btn" ).click(function() {
+    $( "#new_passenger" ).submit();
+  });
+  </script>
 </div>
-<% end %>

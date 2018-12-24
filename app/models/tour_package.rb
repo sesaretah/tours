@@ -1,7 +1,8 @@
 class TourPackage < ActiveRecord::Base
   self.primary_key = 'uuid'
   belongs_to :agency
-  has_many :tours
+  has_many :tours, :dependent => :destroy
+  has_many :uploads, :as => :uploadable, :dependent => :destroy
 
   def image(style)
     @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self.id, attachment_type: 'tour_package_attachment').first

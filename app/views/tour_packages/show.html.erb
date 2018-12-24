@@ -65,7 +65,7 @@
               <div class="small text-muted"><%= Hotel.find(@accomodation1.accomodable_id).name%>  <%=raw Hotel.find(@accomodation1.accomodable_id).star%></div>
               <%end%>
               <%@accomodation2 = tour.accomodations.order('nights desc').limit(2).last %>
-              <% if !@accomodation1.blank?%>
+              <% if !@accomodation1.blank? && @accomodation1 != @accomodation2%>
               <div class="small text-muted"><%= Hotel.find(@accomodation2.accomodable_id).name%> <%=raw Hotel.find(@accomodation2.accomodable_id).star%></div>
               <%end%>
             </td>

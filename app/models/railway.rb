@@ -12,7 +12,7 @@ class Railway < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Railway.find_by_uuid(uuid)
   end
 end

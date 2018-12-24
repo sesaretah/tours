@@ -1,4 +1,5 @@
 class Reservation < ActiveRecord::Base
+  self.primary_key = 'uuid'
   belongs_to :user
   belongs_to :tour
   belongs_to :passenger
@@ -12,7 +13,7 @@ class Reservation < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Reservation.find_by_uuid(uuid)
   end
 end

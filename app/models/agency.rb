@@ -3,7 +3,7 @@ class Agency < ActiveRecord::Base
   validates_format_of :subdomain, :with =>  /\A[a-zA-Z0-9]*\z/
 
   belongs_to :user
-  has_many :tour_packages
+  has_many :tour_packages, :dependent => :destroy
 
   before_create :set_uuid
   def set_uuid
@@ -14,7 +14,7 @@ class Agency < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Agency.find_by_uuid(uuid)
   end
 end

@@ -1,14 +1,24 @@
 class ReservationsController < ApplicationController
+  before_filter :find_tour, only: [:passengers, :verification, :new]
+  def verification
+
+  end
 
   def passengers
-    @tour = Tour.find(params[:tour_id])
+
   end
+
   def new
     @reservation = Reservation.new
-    @tour = Tour.find(params[:tour_id])
   end
 
-  def create
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    @tour = @reservation.tour
+    @reservation.destroy
+  end
 
+  def find_tour
+    @tour = Tour.find(params[:tour_id])
   end
 end

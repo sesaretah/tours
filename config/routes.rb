@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   get '/reservations/new', to: "reservations#new"
   get '/reservations/passengers', to: "reservations#passengers"
+  get '/reservations/verification', to: "reservations#verification"
+  get '/reservations/:id/destroy', to: "reservations#destroy"
 end

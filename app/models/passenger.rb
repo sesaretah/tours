@@ -3,6 +3,7 @@ class Passenger < ActiveRecord::Base
 
   has_many :passengers, :through => :reservations
   has_many :reservations, dependent: :destroy
+  has_many :uploads, :as => :uploadable, :dependent => :destroy
 
   before_create :set_uuid
   def set_uuid
@@ -13,7 +14,7 @@ class Passenger < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Passenger.find_by_uuid(uuid)
   end
 end

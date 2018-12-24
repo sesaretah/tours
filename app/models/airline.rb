@@ -12,7 +12,7 @@ class Airline < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Airline.find_by_uuid(uuid)
   end
 end

@@ -1,6 +1,6 @@
 <div id="tour-list">
   <div class="table-responsive">
-    <table class="table table-hover table-outline table-vcenter ">
+    <table class="table table-hover table-outline table-vcenter card-table">
       <thead>
         <tr>
           <td><%=t :name%></td>
@@ -8,6 +8,7 @@
           <td><%=t :father_name%></td>
           <td><%=t :birthdate%></td>
           <td><%=t :passport_no%></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,11 @@
           <td><%= passenger.father_name%></td>
           <td><%= passenger.birthdate%></td>
           <td><%= passenger.passport_no%></td>
+          <td>
+            <%= link_to "/reservations/#{passenger.reservations.where(tour_id: tour.id).first.id}/destroy", method: :get, remote: true, class: "icon" ,data: { confirm: 'Are you sure?' } do %>
+            <i class="fe fe-trash" style='vertical-align:-3px;'></i>
+            <%end%>
+          </td>
         </tr>
         <%end%>
       </tabody>

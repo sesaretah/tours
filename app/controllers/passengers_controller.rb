@@ -25,13 +25,10 @@ class PassengersController < ApplicationController
   # POST /passengers.json
   def create
     @passenger = Passenger.new(passenger_params)
-
     respond_to do |format|
       if @passenger.save
-        if !params[:tour_id].blank?
-          @tour = Tour.find(params[:tour_id])
-          @reservation = Reservation.create(passenger_id: @passenger.id, tour_id: params[:tour_id] )
-        end
+        manage_reservations
+        manage_uploads
         format.html { redirect_to @passenger, notice: 'Passenger was successfully created.' }
         format.json { render :show, status: :created, location: @passenger }
         format.js
@@ -66,14 +63,36 @@ class PassengersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_passenger
-      @passenger = Passenger.find(params[:id])
+  def manage_reservations
+    if !params[:tour_id].blank?
+      @tour = Tour.find(params[:tour_id])
+      @reservation = Reservation.create(passenger_id: @passenger.id, tour_id: params[:tour_id] )
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def passenger_params
-      params.require(:passenger).permit(:name, :surename, :business_id, :sex, :tel, :birthdate, :ssn, :place_of_birth, :passport_no, :nation_id)
+  def manage_uploads
+    if !params[:attachments].blank?
+      @upload_ids = params[:attachments].split(',')
+      for upload_id in @upload_ids
+        if !upload_id.blank?
+          @upload = Upload.find_by_id(upload_id)
+          if !@upload.blank?
+            @upload.uploadable_id = @passenger.id
+            @upload.save
+          end
+        end
+      end
     end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_passenger
+    @passenger = Passenger.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def passenger_params
+    params.require(:passenger).permit(:name, :surename, :business_id, :sex, :tel, :birthdate, :ssn, :place_of_birth, :passport_no, :nation_id)
+  end
 end

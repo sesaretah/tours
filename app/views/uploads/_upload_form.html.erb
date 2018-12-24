@@ -47,6 +47,7 @@ function send(){
   <% end %>
   <script>
   Dropzone.autoDiscover = false;
+  var jcrop_api;
   $("#new_upload").dropzone({
     dictDefaultMessage : "<%=t :drop_files_here_to_upload%>",
     dictRemoveFile : "<%=t :remove_file %>",
@@ -64,14 +65,19 @@ function send(){
         $('#myModal').modal('show');
         $('#target').attr('src', responseText.image);
         $('#target').attr('for', responseText.id);
+        $('#attachments').val($('#attachments').val() + ',' + responseText.id);
+        if(jcrop_api){
+          jcrop_api.destroy();
+        }
         $(function() {
           $('#target').Jcrop({
             onChange: update_crop,
             onSelect: update_crop,
             setSelect: [0, 0, 500, 500],
-            aspectRatio: 4/3
-          });
+            aspectRatio:  <%= ratio%>
+          }, function(){ jcrop_api = this; });
         });
+
         function update_crop(coords) {
           var ratio = responseText.ratio
           $('#crop_x').val(Math.floor(coords.x * ratio));

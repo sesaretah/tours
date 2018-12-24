@@ -13,7 +13,7 @@ class Accomodation < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Accomodation.find_by_uuid(uuid)
   end
 end

@@ -32,6 +32,7 @@ class ToursController < ApplicationController
         extract_accomodations
         extract_prices
         extract_transportations
+        manage_uploads
         format.html { redirect_to "/tours/#{@tour.uuid}", notice: 'Tour was successfully created.' }
         format.json { render :show, status: :created, location: @tour }
       else
@@ -50,6 +51,7 @@ class ToursController < ApplicationController
         extract_accomodations
         extract_prices
         extract_transportations
+        manage_uploads
         format.html { redirect_to "/tours/#{@tour.uuid}", notice: 'Tour was successfully updated.' }
         format.json { render :show, status: :ok, location: @tour }
       else
@@ -114,6 +116,21 @@ class ToursController < ApplicationController
   def extract_dates
     @tour.start_date = JalaliDate.to_gregorian(params[:start_date_yyyy],params[:start_date_mm],params[:start_date_dd])
     @tour.end_date = JalaliDate.to_gregorian(params[:end_date_yyyy],params[:end_date_mm],params[:end_date_dd])
+  end
+
+  def manage_uploads
+    if !params[:attachments].blank?
+      @upload_ids = params[:attachments].split(',')
+      for upload_id in @upload_ids
+        if !upload_id.blank?
+          @upload = Upload.find_by_id(upload_id)
+          if !@upload.blank?
+            @upload.uploadable_id = @tour.id
+            @upload.save
+          end
+        end
+      end
+    end
   end
 
   private

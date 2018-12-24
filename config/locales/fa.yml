@@ -259,6 +259,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  pictures: 'عکس ها'
+  passengers_details: 'مشخصات مسافران '
+  tour_detail: 'مشخصات تور'
   passenger_info: 'اطلاعات مسافر'
   verify_and_proceed: 'تایید و ادامه'
   tour_selection: 'انتخاب تور'

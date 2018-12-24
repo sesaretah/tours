@@ -12,7 +12,7 @@ class Pricing < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Pricing.find_by_uuid(uuid)
   end
 end

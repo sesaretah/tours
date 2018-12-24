@@ -14,7 +14,7 @@ class Transportation < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Transportation.find_by_uuid(uuid)
   end
 end

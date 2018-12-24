@@ -12,7 +12,7 @@ class Hotel < ActiveRecord::Base
     self.uuid
   end
 
-  def find(uuid)
+  def self.find(uuid)
     Hotel.find_by_uuid(uuid)
   end
 
