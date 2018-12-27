@@ -12,9 +12,9 @@ class Blog < ActiveRecord::Base
     end
   end
 
-  
+
   before_create :set_rank
-  def set_uuid
+  def set_rank
     self.rank = 0
   end
 

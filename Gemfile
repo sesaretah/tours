@@ -51,7 +51,9 @@ gem 'paperclip'
 gem 'mysql2',          '~> 0.3.18', :platform => :ruby
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
-gem 'thinking-sphinx', '~> 4.0'
+gem "thinking-sphinx", "~> 4.0",
+  :git    => "https://github.com/pat/thinking-sphinx.git",
+  :branch => "develop"
 gem 'bootstrap', '~> 4.1.1'
 gem 'diffy', '~> 3.2'
 gem 'tabler-rubygem'
