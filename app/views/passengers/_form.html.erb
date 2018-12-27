@@ -97,7 +97,7 @@
 <%= hidden_field_tag :tour_id, @tour.id%>
 <%= hidden_field_tag :attachments, ''%>
 <% end %>
-<%= render partial: 'uploads/upload_form', locals: {id: 0, ratio: '3/4' ,class_name: 'Passenger', type:'passenger_attachment'}%>
+<%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '3/4' ,class_name: 'Passenger', type:'passenger_attachment'}%>
 <div class="card-footer text-right">
   <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>
 </div>

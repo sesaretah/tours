@@ -1,5 +1,24 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :check, :change_rank]
+
+  def change_rank
+    if params[:move] == 'up'
+      @blog.rank += 1
+    else
+      @blog.rank -= 1
+    end
+    @blog.save
+    redirect_to '/'
+  end
+
+  def check
+    if params[:to] == 'check'
+      @blog.view_in_homepage = true
+    else
+      @blog.view_in_homepage = false
+    end
+    @blog.save
+  end
 
   # GET /blogs
   # GET /blogs.json
@@ -80,13 +99,13 @@ class BlogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog
-      @blog = Blog.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blog
+    @blog = Blog.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def blog_params
-      params.require(:blog).permit(:title, :content, :agency_id, :uuid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def blog_params
+    params.require(:blog).permit(:title, :content, :agency_id, :uuid)
+  end
 end

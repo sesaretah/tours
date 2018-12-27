@@ -22,32 +22,8 @@ $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'rai
 $("#railways-nav").addClass('active');
 <%end%>
 
-<% if @section == 'segments'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'segments/agency_segments')) %>");
-$("#segments-nav").addClass('active');
-<%end%>
 
-<% if @section == 'slider'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'home/slide_settings')) %>");
-$("#slider-nav").addClass('active');
-<%end%>
-
-<% if @section == 'faq'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'faqs/business_faqs')) %>");
-$("#faq-nav").addClass('active');
-<%end%>
-
-<% if @section == 'theme'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'businesses/change_theme')) %>");
-$("#theme-nav").addClass('active');
-<%end%>
-
-<% if @section == 'pixel'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'pixels/business_pixel')) %>");
-$("#pixel-nav").addClass('active');
-<%end%>
-
-<% if @section == 'sales'%>
-$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'home/sales_settings')) %>");
-$("#sales-nav").addClass('active');
+<% if @section == 'slides'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'slides/agency_slides')) %>");
+$("#slides-nav").addClass('active');
 <%end%>

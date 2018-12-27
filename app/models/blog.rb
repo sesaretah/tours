@@ -12,6 +12,13 @@ class Blog < ActiveRecord::Base
     end
   end
 
+  
+  before_create :set_rank
+  def set_uuid
+    self.rank = 0
+  end
+
+
   before_create :set_uuid
   def set_uuid
     self.uuid = SecureRandom.uuid

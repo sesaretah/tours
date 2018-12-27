@@ -7,6 +7,49 @@
       <div class="card-header">
         <h3 class="card-title"></h3>
         <div class="card-options">
+          <label class="custom-switch ml-2 mt-1" style='float: left;'>
+            <input type="checkbox" name="view_<%=@tour_package.id%>" id='view_<%= @tour_package.id%>' <%if @tour_package.view_in_homepage%>checked<%end%> class="custom-switch-input">
+            <span class="custom-switch-indicator"></span>
+            <span class="custom-switch-description" style='font-size: 80%;'><%=t :view_in_the_first_page%></span>
+          </label>
+          <script>
+          $('.custom-switch-input').change(function() {
+            var id = $(this).attr('id').split("_")[1];
+            if($(this).is(":checked")) {
+              $.ajax({
+                url: '/tour_packages/check/'+id,
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                  segment_id: id,
+                  to: 'check'
+                },
+                error: function() {
+                  $(this).attr("checked", false);
+                },
+                success: function(res) {
+                  $(this).attr("checked", true);
+                }
+              });
+            } else {
+              $.ajax({
+                url: '/tour_packages/check/'+id,
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                  segment_id: id,
+                  to: 'uncheck'
+                },
+                error: function() {
+                  $(this).attr("checked", true);
+                },
+                success: function(res) {
+                  $(this).attr("checked", false);
+                }
+              });
+            }
+          });
+          </script>
           <%= link_to new_tour_path(tour_package_id: params[:id]), class:'btn btn-secondary' do%>
           <i class="fa fa-globe"></i> <%=t :new_tour%>
           <%end%>

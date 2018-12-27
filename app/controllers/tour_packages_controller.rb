@@ -1,5 +1,24 @@
 class TourPackagesController < ApplicationController
-  before_action :set_tour_package, only: [:show, :edit, :update, :destroy, :upload]
+  before_action :set_tour_package, only: [:show, :edit, :update, :destroy, :upload, :check, :change_rank]
+
+  def change_rank
+    if params[:move] == 'up'
+      @tour_package.rank += 1
+    else
+      @tour_package.rank -= 1
+    end
+    @tour_package.save
+    redirect_to '/'
+  end
+
+  def check
+    if params[:to] == 'check'
+      @tour_package.view_in_homepage = true
+    else
+      @tour_package.view_in_homepage = false
+    end
+    @tour_package.save
+  end
 
   def upload
 
@@ -69,13 +88,13 @@ class TourPackagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tour_package
-      @tour_package = TourPackage.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tour_package
+    @tour_package = TourPackage.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tour_package_params
-      params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tour_package_params
+    params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid)
+  end
 end

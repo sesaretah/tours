@@ -6,6 +6,7 @@ class Upload < ActiveRecord::Base
   belongs_to :passenger, :class_name => "Passenger", :foreign_key => "uploadable_id"
   belongs_to :tour_package, :class_name => "TourPackage", :foreign_key => "uploadable_id"
   belongs_to :hotel, :class_name => "Hotel", :foreign_key => "uploadable_id"
+  belongs_to :slide, :class_name => "Slide", :foreign_key => "uploadable_id"
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :ratio, :caller
   after_update :reprocess_avatar, :if => :cropping?

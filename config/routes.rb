@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :blogs
   resources :passengers
-  devise_for :users, :controllers => {:registrations => "registrations", sessions: "sessions"}
+  devise_for :users
   resources :agencies
   resources :tour_packages
   resources :tours
@@ -29,4 +29,13 @@ Rails.application.routes.draw do
   get '/reservations/passengers', to: "reservations#passengers"
   get '/reservations/verification', to: "reservations#verification"
   get '/reservations/:id/destroy', to: "reservations#destroy"
+
+  get '/tour_packages/check/:id', to: "tour_packages#check"
+  get '/tour_packages/change_rank/:id', to: "tour_packages#change_rank"
+
+  get '/blogs/check/:id', to: "blogs#check"
+  get '/blogs/change_rank/:id', to: "blogs#change_rank"
+
+  get '/landing', to: "home#landing"
+
 end

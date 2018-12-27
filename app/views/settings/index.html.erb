@@ -22,29 +22,11 @@
       <i class="fa fa-money" style="vertical-align:-1px;"></i> <%=t :price_types_settings%>
       <%end%>
 
-      <%= link_to '/settings/sections?section=segments',id: 'segments-nav', class: "list-group-item list-group-item-action active small mb-1", style:'font-weight:normal;', remote: true do%>
-      <i class="fe fe-home" style="vertical-align:-3px;"></i> <%=t :home_settings%>
-      <%end%>
-
-
-      <%= link_to '/home/settings?section=slider', id: 'slider-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <%= link_to '/settings/sections?section=slides', id: 'slides-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fe fe-fast-forward" style="vertical-align:-3px;"></i> <%=t :slider_settings%>
       <%end%>
 
-      <%= link_to '/home/settings?section=faq', id: 'faq-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
-      <i class="fe fe-help-circle" style="vertical-align:-3px;"></i> <%=t :faq_settings%>
-      <%end%>
-
-      <%= link_to '/home/settings?section=theme', id: 'theme-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
-      <i class="fe fe-layers" style="vertical-align:-3px;"></i> <%=t :theme_settings%>
-      <%end%>
-
-
-
-      <%= link_to '/home/settings?section=faq', id: 'faq-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;' do%>
-      <i class="fe fe-tablet" style="vertical-align:-3px;"></i> <%=t :mobile_app_management%>
-      <%end%>
-    </div>
+  </div>
   </div>
   <div class="col-md-9 order-lg-1">
     <div class="card">

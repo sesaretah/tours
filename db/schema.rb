@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181226070130) do
+ActiveRecord::Schema.define(version: 20181227131925) do
 
   create_table "accomodations", force: :cascade do |t|
     t.string   "accomodable_type", limit: 255
@@ -56,12 +56,14 @@ ActiveRecord::Schema.define(version: 20181226070130) do
   add_index "airlines", ["uuid"], name: "index_airlines_on_uuid", unique: true, using: :btree
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
-    t.string   "agency_id",  limit: 255
-    t.string   "uuid",       limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",            limit: 255
+    t.text     "content",          limit: 65535
+    t.string   "agency_id",        limit: 255
+    t.string   "uuid",             limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "view_in_homepage"
+    t.integer  "rank",             limit: 4
   end
 
   add_index "blogs", ["agency_id"], name: "index_blogs_on_agency_id", using: :btree
@@ -121,6 +123,17 @@ ActiveRecord::Schema.define(version: 20181226070130) do
   add_index "pricings", ["tour_id"], name: "index_pricings_on_tour_id", using: :btree
   add_index "pricings", ["uuid"], name: "index_pricings_on_uuid", unique: true, using: :btree
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.string   "phone_number", limit: 255
+    t.string   "uuid",         limit: 255
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "profiles", ["uuid"], name: "index_profiles_on_uuid", unique: true, using: :btree
+
   create_table "railways", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "wagon_type",      limit: 255
@@ -147,15 +160,17 @@ ActiveRecord::Schema.define(version: 20181226070130) do
   add_index "reservations", ["uuid"], name: "index_reservations_on_uuid", unique: true, using: :btree
 
   create_table "tour_packages", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "days",       limit: 4
-    t.integer  "nights",     limit: 4
-    t.text     "details",    limit: 65535
-    t.string   "agency_id",  limit: 255
-    t.string   "uuid",       limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "integer_id", limit: 4
+    t.string   "title",            limit: 255
+    t.integer  "days",             limit: 4
+    t.integer  "nights",           limit: 4
+    t.text     "details",          limit: 65535
+    t.string   "agency_id",        limit: 255
+    t.string   "uuid",             limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "integer_id",       limit: 4
+    t.boolean  "view_in_homepage"
+    t.integer  "rank",             limit: 4
   end
 
   add_index "tour_packages", ["agency_id"], name: "index_tour_packages_on_agency_id", using: :btree
