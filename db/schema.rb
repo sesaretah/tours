@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181222162937) do
+ActiveRecord::Schema.define(version: 20181226070130) do
 
   create_table "accomodations", force: :cascade do |t|
     t.string   "accomodable_type", limit: 255
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20181222162937) do
   end
 
   add_index "airlines", ["uuid"], name: "index_airlines_on_uuid", unique: true, using: :btree
+
+  create_table "blogs", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.string   "agency_id",  limit: 255
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "blogs", ["agency_id"], name: "index_blogs_on_agency_id", using: :btree
+  add_index "blogs", ["uuid"], name: "index_blogs_on_uuid", unique: true, using: :btree
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -143,9 +155,11 @@ ActiveRecord::Schema.define(version: 20181222162937) do
     t.string   "uuid",       limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "integer_id", limit: 4
   end
 
   add_index "tour_packages", ["agency_id"], name: "index_tour_packages_on_agency_id", using: :btree
+  add_index "tour_packages", ["integer_id"], name: "index_tour_packages_on_integer_id", unique: true, using: :btree
   add_index "tour_packages", ["uuid"], name: "index_tour_packages_on_uuid", using: :btree
 
   create_table "tours", force: :cascade do |t|
@@ -186,6 +200,8 @@ ActiveRecord::Schema.define(version: 20181222162937) do
     t.integer  "attachment_file_size",    limit: 8
     t.datetime "attachment_updated_at"
   end
+
+  add_index "uploads", ["uploadable_id"], name: "index_uploads_on_uploadable_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

@@ -247,6 +247,9 @@ fa:
           start_date: 'رفت'
           end_date: 'برگشت '
           details: 'توضیحات'
+        blog:
+            title: 'عنوان'
+            content: 'متن'
         user:
             username: 'تلفن همراه کاربر'
             mobile: 'شماره تلفن همراه'
@@ -259,6 +262,11 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  add_new_blog: 'مطلب جدید '
+  topics: 'مطالب'
+  view_in_the_first_page: 'نمایش '
+  level: 'ترتیب'
+  search: 'جستجو '
   pictures: 'عکس ها'
   passengers_details: 'مشخصات مسافران '
   tour_detail: 'مشخصات تور'

@@ -212,7 +212,7 @@
   <h5 style="color:#24426c;"><i class="fa fa-paperclip" style="vertical-align:-2px;"></i> <%=t :pictures%></h5>
   <hr class="mt-2 mb-4"/>
   <% if @tour.id == nil%>
-    <%= render partial: 'uploads/upload_form', locals: {id: 0, ratio: '4/3', class_name: 'Tour', type:'tour_pictures'}%>
+    <%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '4/3', class_name: 'Tour', type:'tour_pictures'}%>
   <%else%>
     <%= render partial: 'uploads/upload_form', locals: {id: @tour.id, ratio: '4/3', class_name: 'Tour', type:'tour_pictures'}%>
   <%end%>

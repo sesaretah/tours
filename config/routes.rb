@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :blogs
   resources :passengers
   devise_for :users, :controllers => {:registrations => "registrations", sessions: "sessions"}
   resources :agencies
   resources :tour_packages
   resources :tours
   resources :uploads
+  resources :blogs
   root "home#index"
 
   get 'settings/index'

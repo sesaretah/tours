@@ -1,0 +1,42 @@
+<div class="card">
+  <%= form_for @blog do |f|%>
+  <div class='card-body'>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :title, class: "form-label" %>
+          <%= f.text_field :title, class: "form-control"%>
+        </div>
+      </div>
+    </div>
+
+    <% if @upload_ids.blank?%>
+    <%= hidden_field_tag :attachments, ''%>
+    <%else%>
+    <%= hidden_field_tag :attachments, @upload_ids.split(',')%>
+    <%end%>
+    <%= f.hidden_field :content%>
+    <trix-editor input="blog_content"></trix-editor>
+  <%end%>
+  <div class="row">
+    <div class="col-md-12">
+
+        <h5 class="mt-5"><%=t :cover_photo%></h5>
+      <% if @blog.id == nil%>
+        <%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '4/3', class_name: 'Blog', type:'blog_cover'}%>
+      <%else%>
+        <%= render partial: 'uploads/upload_form', locals: {id: @blog.id, ratio: '4/3', class_name: 'Blog', type:'blog_cover'}%>
+      <%end%>
+    </div>
+  </div>
+</div>
+  <div class="card-footer text-right">
+    <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>
+  </div>
+  <script>
+  $( "#submit-btn" ).click(function() {
+    console.log('clicked');
+    $( ".<%= params[:action]%>_blog" ).submit();
+  });
+  </script>
+</div>

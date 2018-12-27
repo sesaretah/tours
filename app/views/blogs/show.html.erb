@@ -1,0 +1,13 @@
+<div class="card">
+  <div class='card-header'>
+    <%= sanitize @blog.title%>
+    <div class='card-options'>
+      <a href="/blogs/<%=@blog.uuid%>/edit" class='btn btn-secondary'><i class="fe fe-edit" style="vertical-align:-3px;"></i> <%=t :edit%></a>
+    </div>
+  </div>
+  <div class='card-body'>
+    <div id="blog">
+      <%= sanitize @blog.content%>
+    </div>
+  </div>
+</div>
