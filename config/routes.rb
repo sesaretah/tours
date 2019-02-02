@@ -51,4 +51,8 @@ Rails.application.routes.draw do
   post '/assignments', to: "assignments#create"
   get '/assignments/:id/destroy', to: "assignments#destroy"
 
+  post '/provinces', to: "provinces#create"
+  get '/provinces/:id/destroy', to: "provinces#destroy"
+
+
 end

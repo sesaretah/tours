@@ -1,7 +1,10 @@
 class TourPackage < ActiveRecord::Base
   self.primary_key = 'uuid'
   after_save ThinkingSphinx::RealTime.callback_for(:tour_package)
+
   belongs_to :agency
+  belongs_to :province
+
   has_many :tours, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
 

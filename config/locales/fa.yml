@@ -263,6 +263,14 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  ability_to_post_tour_packages: 'قابلیت ثبت کاروان '
+  ability_to_post_blog: 'قابلیت ثبت مطلب'
+  ability_to_verify_ads: 'قابلیت تایید آگهی'
+  ability_to_change_categories: 'قابلیت تغییر دسته بندی ها'
+  ability_to_change_faqs:  'قابلیت تغییر پرسشهای متداول'
+  ability_to_change_roles: 'قابلیت تغییر نقش ها'
+  ability_to_assign_roles: 'قابلیت اعطای نقش'
+  provinces: 'استان ‌ها '
   submition_date: 'زمان ثبت'
   size: 'ابعاد'
   large: 'بزرگ'

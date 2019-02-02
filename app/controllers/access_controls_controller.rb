@@ -72,7 +72,7 @@ class AccessControlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def access_control_params
-      params.require(:access_control).permit(:ability_to_post_ads, :ability_to_post_blog, :ability_to_verify_ads, :ability_to_change_categories, :ability_to_change_faqs, :ability_to_change_roles, :ability_to_assign_roles, :uuid, :role_id)
+      params.require(:access_control).permit(:ability_to_post_tour_packages, :ability_to_post_blog, :ability_to_verify_ads, :ability_to_change_categories, :ability_to_change_faqs, :ability_to_change_roles, :ability_to_assign_roles, :uuid, :role_id)
     end
 
     def check_user

@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def grant_access(ward, user)
     @flag = 0
-    if Role.all.blank? #when new app starts
+    if Role.all.blank? || (Role.count == 1 && Assignment.count < 2) #when new app starts
       return true
     end
     if user.assignments.blank?

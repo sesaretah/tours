@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202153953) do
+ActiveRecord::Schema.define(version: 20190202160758) do
 
   create_table "access_controls", force: :cascade do |t|
     t.string   "uuid",                          limit: 255
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20190202153953) do
     t.boolean  "ability_to_assign_roles"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.string   "role_id",                       limit: 255
   end
 
+  add_index "access_controls", ["role_id"], name: "index_access_controls_on_role_id", using: :btree
   add_index "access_controls", ["uuid"], name: "index_access_controls_on_uuid", unique: true, using: :btree
 
   create_table "accomodations", force: :cascade do |t|
@@ -174,6 +176,15 @@ ActiveRecord::Schema.define(version: 20190202153953) do
   add_index "profiles", ["integer_id"], name: "index_profiles_on_integer_id", using: :btree
   add_index "profiles", ["uuid"], name: "index_profiles_on_uuid", unique: true, using: :btree
 
+  create_table "provinces", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "provinces", ["uuid"], name: "index_provinces_on_uuid", using: :btree
+
   create_table "railways", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "wagon_type",      limit: 255
@@ -280,8 +291,10 @@ ActiveRecord::Schema.define(version: 20190202153953) do
     t.string   "username",               limit: 255
     t.string   "mobile",                 limit: 255
     t.string   "fullname",               limit: 255
+    t.string   "current_role_id",        limit: 255
   end
 
+  add_index "users", ["current_role_id"], name: "index_users_on_current_role_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

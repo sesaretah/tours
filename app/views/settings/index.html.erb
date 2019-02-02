@@ -31,6 +31,10 @@
       <%end%>
       <%end%>
 
+      <%= link_to '/settings/sections?section=provinces', id: 'provinces-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <i class="fe fe-book" style="vertical-align:-3px;"></i> <%=t :provinces%>
+      <%end%>
+
       <%= link_to '/settings/sections?section=airlines', id: 'airlines-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
       <i class="fa fa-plane" style="vertical-align:-1px;"></i> <%=t :flight_settings%>
       <%end%>
