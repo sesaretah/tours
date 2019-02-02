@@ -1,14 +1,39 @@
 class TourPackagesController < ApplicationController
-  before_action :set_tour_package, only: [:show, :edit, :update, :destroy, :upload, :check, :change_rank]
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_action :set_tour_package, only: [:show, :edit, :update, :destroy, :check, :change_rank, :change_status, :change_size]
+  before_action :check_user, only: [:new, :edit, :update, :destroy, :create]
+  before_action :verify_ads, only: [:change_status, :change_size, :check]
 
-  def change_rank
-    if params[:move] == 'up'
-      @tour_package.rank += 1
+  def change_status
+    if params[:status] == "1"
+      @tour_package.status = 1
     else
-      @tour_package.rank -= 1
+      @tour_package.status = 0
     end
     @tour_package.save
-    redirect_to '/'
+  end
+
+  def change_size
+    if params[:size] == "2"
+      @tour_package.size = 2
+    else
+      @tour_package.size = 1
+    end
+    @tour_package.save
+  end
+
+  def change_rank
+    if !grant_access("ability_to_verify_ads", current_user)
+      head(403)
+    else
+      if params[:move] == 'up'
+        @tour_package.rank += 1
+      else
+        @tour_package.rank -= 1
+      end
+      @tour_package.save
+      redirect_to '/'
+    end
   end
 
   def check
@@ -96,5 +121,17 @@ class TourPackagesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def tour_package_params
     params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid)
+  end
+
+  def verify_ads
+    if !grant_access("ability_to_verify_ads", current_user)
+      head(403)
+    end
+  end
+
+  def check_user
+    if !grant_access("ability_to_post_tour_packages", current_user)
+      head(403)
+    end
   end
 end

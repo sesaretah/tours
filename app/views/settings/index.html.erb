@@ -2,8 +2,33 @@
   <div class="col-lg-3 ">
     <div class="list-group list-group-transparent mb-4">
 
-      <%= link_to '/settings/section?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
+      <%= link_to '/settings/sections?section=sales', id: 'sales-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
       <i class="fe fe-shopping-cart" style="vertical-align:-3px;"></i> <%=t :sales_settings%>
+      <%end%>
+
+
+      <%if grant_access("ability_to_verify_ads", current_user)%>
+      <%= link_to '/settings/sections?section=awaiting_ads', id: 'awaiting_ads-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
+      <i class="far fa-flag" style="vertical-align:-3px;"></i> <%=t :awaiting_advertisements%>
+      <%end%>
+      <%end%>
+
+      <%if grant_access("ability_to_change_categories", current_user)%>
+      <%= link_to '/settings/sections?section=categories', id: 'categories-nav', class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true  do%>
+      <i class="far fa-folder" style="vertical-align:-3px;"></i> <%=t :categories%>
+      <%end%>
+      <%end%>
+
+      <%if grant_access("ability_to_change_roles", current_user)%>
+      <%= link_to '/settings/sections?section=roles', id: 'roles-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <i class="fe fe-user" style="vertical-align:-3px;"></i> <%=t :roles%>
+      <%end%>
+      <%end%>
+
+      <%if grant_access("ability_to_assign_roles", current_user)%>
+      <%= link_to '/settings/sections?section=assignments', id: 'assignments-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
+      <i class="fe fe-user-check" style="vertical-align:-3px;"></i> <%=t :assignments%>
+      <%end%>
       <%end%>
 
       <%= link_to '/settings/sections?section=airlines', id: 'airlines-nav',class: "list-group-item list-group-item-action small mb-1", style:'font-weight:normal;', remote: true do%>
@@ -26,14 +51,12 @@
       <i class="fe fe-fast-forward" style="vertical-align:-3px;"></i> <%=t :slider_settings%>
       <%end%>
 
-  </div>
+    </div>
   </div>
   <div class="col-md-9 order-lg-1">
     <div class="card">
-      <div class="card-body">
-        <div id='settings-detail'></div>
-        <div class='mb-4'></div>
-      </div>
+      <div id='settings-detail'></div>
+      <div class='mb-4'></div>
     </div>
   </div>
 </div>

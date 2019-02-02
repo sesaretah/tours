@@ -4,6 +4,33 @@ $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'seg
 $("#homepage-nav").addClass('active');
 <%end%>
 
+<% if @section == 'awaiting_ads'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'settings/awaiting_ads')) %>");
+$("#awaiting_ads-nav").addClass('active');
+<%end%>
+
+<% if @section == 'categories'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'categories/form')) %>");
+$("#categories-nav").addClass('active');
+<%end%>
+
+
+<% if @section == 'roles'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'roles/form')) %>");
+$("#roles-nav").addClass('active');
+<%end%>
+
+
+<% if @section == 'assignments'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'assignments/form')) %>");
+$("#assignments-nav").addClass('active');
+<%end%>
+
+<% if @section == 'provinces'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'provinces/form')) %>");
+$("#provinces-nav").addClass('active');
+<%end%>
+
 <% if @section == 'airlines'%>
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'airlines/agency_airlines')) %>");
 $("#airlines-nav").addClass('active');

@@ -1,0 +1,21 @@
+<div id='categories-list'>
+  <table class="table table-hover table-outline">
+    <%for category in Category.all%>
+    <tr>
+      <td><%= role.title%></td>
+      <td>
+        <div class="tag tag-dark" style='vertical-align: 6px;'>
+          <%= category.tour_packages.count %>
+          <span class="tag-addon tag-success"><i class="far fa-flag" style="vertical-align: -3px;"></i></span>
+        </div>
+      </td>
+      <td>
+        <%= link_to "/categories/#{category.id}/destroy", remote: true, class: "icon" ,data: { confirm: t(:are_you_sure) } do %>
+        <i class="fe fe-trash" style='vertical-align:-3px;'></i>
+        <%end%>
+
+      </td>
+    </tr>
+    <%end%>
+  </table>
+</div>

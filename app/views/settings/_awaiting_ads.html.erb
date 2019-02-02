@@ -1,0 +1,129 @@
+<div id="settings-detail">
+  <div class="card-header">
+
+  </div>
+  <div class="card-body">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :agency%></th>
+          <th><%=t :title%></th>
+          <th><%=t :view%></th>
+          <th><%=t :verify%></th>
+          <th><%=t :size%></th>
+          <th><%=t :submition_date%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for tour_package in TourPackage.all.order('created_at desc')%>
+        <tr>
+          <td>
+            <% if !tour_package.agency.blank?%>
+              <%= truncate(tour_package.agency.name, length: 20)%>
+            <%end%>
+          </td>
+          <td><%= truncate(tour_package.title, length: 20)%></td>
+          <td>
+            <%= link_to tour_package do%>
+            <i class="fe fe-play"></i>
+            <%end%>
+          </td>
+          <td>
+            <label class="custom-control custom-checkbox p-0">
+              <input type="checkbox" class="custom-control-input" id="status_<%= tour_package.id%>" <% if tour_package.status == 1%>checked<%end%> value="1">
+              <span class="custom-control-label"></span>
+            </label>
+            <script>
+            $('#status_<%= tour_package.id%>').change(function() {
+              if($(this).is(":checked")) {
+                $.ajax({
+                  url: '/tour_packages/change_status/<%= tour_package.id%>',
+                  type: 'GET',
+                  dataType: 'json',
+                  data: {
+                    status: 1
+                  },
+                  error: function() {
+                    $(this).attr("checked", false);
+                  },
+                  success: function(res) {
+                    $(this).attr("checked", true);
+                  }
+                });
+              } else {
+                $.ajax({
+                  url: '/tour_packages/change_status/<%= tour_package.id%>',
+                  type: 'GET',
+                  dataType: 'json',
+                  data: {
+                    status: 0
+                  },
+                  error: function() {
+                    $(this).attr("checked", true);
+                  },
+                  success: function(res) {
+                    $(this).attr("checked", false);
+                  }
+                });
+              }
+            });
+            </script>
+          </td>
+          <td>
+            <label class="custom-switch">
+              <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" id="size_<%= tour_package.id%>" <% if tour_package.size == 2%>checked<%end%>>
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description"><%=t :large%></span>
+            </label>
+            <script>
+            $('#size_<%= tour_package.id%>').change(function() {
+              if($(this).is(":checked")) {
+                $.ajax({
+                  url: '/tour_packages/change_size/<%= tour_package.id%>',
+                  type: 'GET',
+                  dataType: 'json',
+                  data: {
+                    size: 2
+                  },
+                  error: function() {
+                    $(this).attr("checked", false);
+                  },
+                  success: function(res) {
+                    $(this).attr("checked", true);
+                  }
+                });
+              } else {
+                $.ajax({
+                  url: '/tour_packages/change_size/<%= tour_package.id%>',
+                  type: 'GET',
+                  dataType: 'json',
+                  data: {
+                    size: 1
+                  },
+                  error: function() {
+                    $(this).attr("checked", true);
+                  },
+                  success: function(res) {
+                    $(this).attr("checked", false);
+                  }
+                });
+              }
+            });
+            </script>
+          </td>
+          <td class="text-nowrap">
+            <% @jalali = JalaliDate.to_jalali(tour_package.created_at)%>
+            <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+          </td>
+          <td class="w-1">
+            <%= link_to tour_package, method: :delete, remote: true ,class: "icon" ,data: { confirm: t(:are_you_sure) } do %>
+            <i class="fe fe-trash"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

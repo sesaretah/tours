@@ -1,9 +1,9 @@
 class TourPackage < ActiveRecord::Base
   self.primary_key = 'uuid'
+  after_save ThinkingSphinx::RealTime.callback_for(:tour_package)
   belongs_to :agency
   has_many :tours, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
-
 
   def image(style)
     @upload = Upload.where(uploadable_type: 'TourPackage', uploadable_id: self.id, attachment_type: 'tour_package_attachment').first
@@ -14,8 +14,19 @@ class TourPackage < ActiveRecord::Base
     end
   end
 
+  before_create :set_integer_id
+  def set_integer_id
+    @last = TourPackage.all.order('integer_id desc').first
+    if !@last.blank?
+      @last_id = @last.integer_id
+    else
+      @last_id = 0
+    end
+    self.integer_id = @last_id + 1
+  end
+
   before_create :set_rank
-  def set_uuid
+  def set_rank
     self.rank = 0
   end
 
@@ -31,4 +42,5 @@ class TourPackage < ActiveRecord::Base
   def self.find(uuid)
     TourPackage.find_by_uuid(uuid)
   end
+
 end

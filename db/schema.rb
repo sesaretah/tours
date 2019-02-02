@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181227131925) do
+ActiveRecord::Schema.define(version: 20190202153953) do
+
+  create_table "access_controls", force: :cascade do |t|
+    t.string   "uuid",                          limit: 255
+    t.boolean  "ability_to_post_tour_packages"
+    t.boolean  "ability_to_post_blog"
+    t.boolean  "ability_to_verify_ads"
+    t.boolean  "ability_to_change_categories"
+    t.boolean  "ability_to_change_faqs"
+    t.boolean  "ability_to_change_roles"
+    t.boolean  "ability_to_assign_roles"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "access_controls", ["uuid"], name: "index_access_controls_on_uuid", unique: true, using: :btree
 
   create_table "accomodations", force: :cascade do |t|
     t.string   "accomodable_type", limit: 255
@@ -55,6 +70,17 @@ ActiveRecord::Schema.define(version: 20181227131925) do
 
   add_index "airlines", ["uuid"], name: "index_airlines_on_uuid", unique: true, using: :btree
 
+  create_table "assignments", force: :cascade do |t|
+    t.string   "role_id",    limit: 255
+    t.integer  "user_id",    limit: 4
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
+  add_index "assignments", ["uuid"], name: "index_assignments_on_uuid", unique: true, using: :btree
+
   create_table "blogs", force: :cascade do |t|
     t.string   "title",            limit: 255
     t.text     "content",          limit: 65535
@@ -68,6 +94,18 @@ ActiveRecord::Schema.define(version: 20181227131925) do
 
   add_index "blogs", ["agency_id"], name: "index_blogs_on_agency_id", using: :btree
   add_index "blogs", ["uuid"], name: "index_blogs_on_uuid", unique: true, using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "uuid",       limit: 255
+    t.string   "title",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.integer  "integer_id", limit: 4
+    t.integer  "rank",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "categories", ["uuid"], name: "index_categories_on_uuid", unique: true, using: :btree
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -130,8 +168,10 @@ ActiveRecord::Schema.define(version: 20181227131925) do
     t.integer  "user_id",      limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "integer_id",   limit: 4
   end
 
+  add_index "profiles", ["integer_id"], name: "index_profiles_on_integer_id", using: :btree
   add_index "profiles", ["uuid"], name: "index_profiles_on_uuid", unique: true, using: :btree
 
   create_table "railways", force: :cascade do |t|
@@ -159,6 +199,15 @@ ActiveRecord::Schema.define(version: 20181227131925) do
   add_index "reservations", ["tour_id"], name: "index_reservations_on_tour_id", using: :btree
   add_index "reservations", ["uuid"], name: "index_reservations_on_uuid", unique: true, using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "roles", ["uuid"], name: "index_roles_on_uuid", unique: true, using: :btree
+
   create_table "tour_packages", force: :cascade do |t|
     t.string   "title",            limit: 255
     t.integer  "days",             limit: 4
@@ -168,9 +217,11 @@ ActiveRecord::Schema.define(version: 20181227131925) do
     t.string   "uuid",             limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "integer_id",       limit: 4
+    t.integer  "integer_id",       limit: 4,     null: false
     t.boolean  "view_in_homepage"
     t.integer  "rank",             limit: 4
+    t.integer  "status",           limit: 4
+    t.integer  "size",             limit: 4
   end
 
   add_index "tour_packages", ["agency_id"], name: "index_tour_packages_on_agency_id", using: :btree
@@ -226,9 +277,11 @@ ActiveRecord::Schema.define(version: 20181227131925) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "username",               limit: 255
+    t.string   "mobile",                 limit: 255
+    t.string   "fullname",               limit: 255
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
