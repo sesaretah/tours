@@ -1,0 +1,16 @@
+<div id='buses-list'>
+  <table class="table table-hover table-outline">
+    <%for bus in Bus.all%>
+    <tr>
+      <td><%= bus.name%></td>
+      <td><%= bus.capacity%></td>
+      <td>
+        <div class="tag tag-dark" style='vertical-align: 6px;'>
+          <%= bus.tours.count %>
+          <span class="tag-addon tag-success"><i class="fe fe-box" style="vertical-align: -3px;"></i></span>
+        </div>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+</div>

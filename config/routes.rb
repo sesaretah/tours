@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   post '/airlines', to: "airlines#create"
   post '/railways', to: "railways#create"
+  post '/buses', to: "buses#create"
   post '/hotels', to: "hotels#create"
   post '/price_types', to: "price_types#create"
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
   get '/railways/options', to: "railways#options"
   get '/airlines/options', to: "airlines#options"
+  get '/buses/options', to: "buses#options"
 
   get '/reservations/new', to: "reservations#new"
   get '/reservations/passengers', to: "reservations#passengers"
@@ -54,5 +56,6 @@ Rails.application.routes.draw do
   post '/provinces', to: "provinces#create"
   get '/provinces/:id/destroy', to: "provinces#destroy"
 
-
+  get '/api/tour_packages', to: "api#tour_packages"
+  get '/api/tour_package/:id', to: "api#tour_package"
 end

@@ -17,6 +17,15 @@ class TourPackage < ActiveRecord::Base
     end
   end
 
+  def cover(style)
+    @upload = Upload.where(uploadable_id: self.id, attachment_type: 'tour_package_attachment').first
+    if !@upload.blank?
+      return @upload.attachment(style)
+    else
+      ActionController::Base.helpers.asset_path("noimage-#{style}.png", :digest => false)
+    end
+  end
+
   before_create :set_integer_id
   def set_integer_id
     @last = TourPackage.all.order('integer_id desc').first

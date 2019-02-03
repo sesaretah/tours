@@ -70,8 +70,7 @@
           <tr>
             <td>
               <div>
-                <% @jalali = JalaliDate.to_jalali(tour.start_date)%>
-                <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+                <%= tour.jalali_start_date%>
               </div>
               <div class="small text-muted">
                 <% @transportation = tour.transportations.where(leg: "Departure").order(:created_at).first%>
@@ -82,8 +81,7 @@
             </td>
             <td>
               <div>
-                <% @jalali = JalaliDate.to_jalali(tour.end_date)%>
-                <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+                <%= tour.jalali_end_date%>
               </div>
               <div class="small text-muted">
                 <% @transportation = tour.transportations.where(leg: "Arrival").order(:created_at).first%>

@@ -25,6 +25,16 @@ class Tour < ActiveRecord::Base
     self.uuid
   end
 
+  def jalali_start_date
+    @jalali = JalaliDate.to_jalali(self.start_date)
+    return "#{@jalali.year}/#{@jalali.month}/#{@jalali.day}"
+  end
+
+  def jalali_end_date
+    @jalali = JalaliDate.to_jalali(self.end_date)
+    return "#{@jalali.year}/#{@jalali.month}/#{@jalali.day}"
+  end
+
   def self.find(uuid)
     Tour.find_by_uuid(uuid)
   end

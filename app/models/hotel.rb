@@ -26,7 +26,7 @@ class Hotel < ActiveRecord::Base
       @result = @result + "<i class='fa fa-star'></i>"
     end
     for j in ((self.stars+1)..5)
-      @result = @result + "<i class='fa fa-star-o'></i>"
+      @result = @result + "<i class='far fa-star'></i>"
     end
     return @result
   end

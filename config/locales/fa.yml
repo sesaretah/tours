@@ -263,6 +263,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  bus_name: 'نام شرکت '
+  buses_settings: 'تعریف حمل و نقل زمینی'
+  change_current_role: 'تغییر نقش'
   ability_to_post_tour_packages: 'قابلیت ثبت کاروان '
   ability_to_post_blog: 'قابلیت ثبت مطلب'
   ability_to_verify_ads: 'قابلیت تایید آگهی'

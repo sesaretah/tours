@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202160758) do
+ActiveRecord::Schema.define(version: 20190203064235) do
 
   create_table "access_controls", force: :cascade do |t|
     t.string   "uuid",                          limit: 255
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 20190202160758) do
 
   add_index "blogs", ["agency_id"], name: "index_blogs_on_agency_id", using: :btree
   add_index "blogs", ["uuid"], name: "index_blogs_on_uuid", unique: true, using: :btree
+
+  create_table "buses", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "capacity",   limit: 4
+    t.integer  "agency_id",  limit: 4
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "buses", ["uuid"], name: "index_buses_on_uuid", unique: true, using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "uuid",       limit: 255
