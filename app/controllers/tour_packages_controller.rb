@@ -75,7 +75,7 @@ class TourPackagesController < ApplicationController
 
     respond_to do |format|
       if @tour_package.save
-        format.html { redirect_to "/tour_packages/upload/#{@tour_package.id}", notice: 'Tour package was successfully created.' }
+        format.html { redirect_to @tour_package.id, notice: 'Tour package was successfully created.' }
         format.json { render :show, status: :created, location: @tour_package }
       else
         format.html { render :new }
@@ -90,7 +90,7 @@ class TourPackagesController < ApplicationController
     respond_to do |format|
       if @tour_package.update(tour_package_params)
         if params['upload'].blank?
-          format.html { redirect_to "/tour_packages/upload/#{@tour_package.id}", notice: 'Tour package was successfully updated.' }
+          format.html { redirect_to @tour_package, notice: 'Tour package was successfully updated.' }
         else
           format.html { redirect_to "/tour_packages", notice: 'Tour package was successfully updated.' }
         end

@@ -51,6 +51,17 @@
         </div>
       </div>
       <div class="card-body">
+        <div class='row'>
+          <h5  style="color:#24426c;"><i class="fa fa-edit" style="vertical-align:-2px;"></i> <%=t :tour_details%></h5>
+          <hr class="mt-2 mb-2"/>
+          <div class='col-md-12 col-lg-12'>
+            <div class="form-group">
+              <div class="form-control-plaintext">
+                <%= @tour.details%>
+              </div>
+            </div>
+          </div>
+        </div>
         <%= render partial: 'tours/dates', locals:{tour: @tour}%>
         <%= render partial: 'tours/pricing', locals:{tour: @tour}%>
         <%= render partial: 'tours/accomodations', locals:{tour: @tour}%>

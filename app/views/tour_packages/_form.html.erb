@@ -47,8 +47,21 @@
       </div>
     </div>
   </div>
+  <%= hidden_field_tag :attachments, ''%>
+  <% end %>
+  <h5 style="color:#24426c;"><i class="fa fa-paperclip" style="vertical-align:-2px;"></i> <%=t :pictures%></h5>
+  <hr class="mt-2 mb-4"/>
+  <% if @tour_package.id == nil%>
+    <%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
+  <%else%>
+    <%= render partial: 'uploads/upload_form', locals: {id: @tour_package.id, ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
+  <%end%>
   <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+    <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>
   </div>
+  <script>
+  $( "#submit-btn" ).click(function() {
+    $( "#new_tour_package" ).submit();
+  });
+  </script>
 </div>
-<% end %>

@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package]
+  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour]
   before_action :is_admin, only: []
   include ActionView::Helpers::TextHelper
 
@@ -47,5 +47,26 @@ class ApiController < ApplicationController
     end
     @tour_package_result = {id: @tour_package.id, title: @tour_package.title, content: "#{@tour_package.days} #{I18n.t(:days)} #{I18n.t(:and)} #{@tour_package.nights} #{I18n.t(:nights)}" ,'cover' => request.base_url + @tour_package.cover('medium'), updated_at: @tour_package.updated_at}
     render :json => {result: 'OK', tour_package: @tour_package_result, tours: @result}.to_json , :callback => params['callback']
+  end
+
+  def tour
+    @tour = Tour.find(params[:id])
+    @transportations = []
+    @pricings = []
+    @result = []
+    @photos = []
+    for transportation in @tour.transportations
+      @transportations << {type: I18n.t(transportation.transportable_type.downcase), name: transportation.transportable_type.classify.constantize.find(transportation.transportable_id).name, leg: I18n.t(transportation.leg.downcase) }
+    end
+    for pricing in @tour.pricings
+      @pricings << {title: pricing.price_type.title, value: pricing.value}
+    end
+
+    for photo in @tour.photos('large')
+      @photos << {url:  request.base_url + photo[:url], id: photo[:id]}
+    end
+
+    @result << {id: @tour.id, details: @tour.details ,title: @tour.tour_package.title + " (#{@tour.tour_package.days} #{I18n.t(:days)} #{I18n.t(:and)} #{@tour.tour_package.nights} #{I18n.t(:nights)})", departure: @tour.jalali_start_date, arrival: @tour.jalali_end_date, accomodations: @tour.hotels, transportations: @transportations, pricings: @pricings, photos: @photos}
+    render :json => {result: 'OK', result:@result}.to_json , :callback => params['callback']
   end
 end

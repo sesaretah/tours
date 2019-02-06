@@ -58,4 +58,5 @@ Rails.application.routes.draw do
 
   get '/api/tour_packages', to: "api#tour_packages"
   get '/api/tour_package/:id', to: "api#tour_package"
+  get '/api/tour/:id', to: "api#tour"
 end

@@ -1,7 +1,7 @@
 class Tour < ActiveRecord::Base
   self.primary_key = 'uuid'
   belongs_to :airline
-  belongs_to :tour_packages
+  belongs_to :tour_package
 
   has_many :accomodations, :dependent => :destroy
   has_many :hotels, :through => :accomodations
@@ -15,6 +15,20 @@ class Tour < ActiveRecord::Base
 
   has_many :passengers, :through => :reservations
   has_many :reservations, dependent: :destroy
+
+
+    def photos(style)
+      @uploads = Upload.where(uploadable_id: self.id, attachment_type: 'tour_pictures')
+      if !@uploads.blank?
+        @images = []
+        for upload in @uploads
+          @images << {url: upload.attachment(style), id: upload.id}
+        end
+        return @images
+      else
+        return [{url: ActionController::Base.helpers.asset_path("noimage-#{style}.png", :digest => false), id: nil}]
+      end
+    end
 
   before_create :set_uuid
   def set_uuid
