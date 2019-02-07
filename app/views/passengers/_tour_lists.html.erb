@@ -5,9 +5,7 @@
         <tr>
           <td><%=t :name%></td>
           <td><%=t :surename%></td>
-          <td><%=t :father_name%></td>
-          <td><%=t :birthdate%></td>
-          <td><%=t :passport_no%></td>
+          <td><%=t :ssn%></td>
           <td></td>
         </tr>
       </thead>
@@ -16,9 +14,7 @@
         <tr>
           <td><%= passenger.name%></td>
           <td><%= passenger.surename%></td>
-          <td><%= passenger.father_name%></td>
-          <td><%= passenger.birthdate%></td>
-          <td><%= passenger.passport_no%></td>
+          <td><%= passenger.ssn%></td>
           <td>
             <%= link_to "/reservations/#{passenger.reservations.where(tour_id: tour.id).first.id}/destroy", method: :get, remote: true, class: "icon" ,data: { confirm: 'Are you sure?' } do %>
             <i class="fe fe-trash" style='vertical-align:-3px;'></i>

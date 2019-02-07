@@ -47,14 +47,67 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <div class="form-label"><%=t :required_fields%></div>
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[father_name_field]" value="1"  <% if @tour_package.father_name_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :father_name_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[birthdate_field]" value="1"  <% if @tour_package.birthdate_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :birthdate_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[place_of_birth_field]" value="1"  <% if @tour_package.place_of_birth_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :place_of_birth_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[passport_no_field]" value="1"  <% if @tour_package.passport_no_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :passport_no_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[en_name_field]" value="1"  <% if @tour_package.en_name_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :en_name_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[en_surename_field]" value="1"  <% if @tour_package.en_surename_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :en_surename_field%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[en_father_name_field]" value="1"  <% if @tour_package.en_father_name_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :en_father_name_field	%></span>
+  </label>
+
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" name="tour_package[attachment_field]" value="1"  <% if @tour_package.attachment_field%>checked=""<%end%>>
+    <span class="custom-control-label"><%=t :attachment_field	%></span>
+  </label>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label :attachment_message, class: "form-label" %>
+        <%= f.text_area :attachment_message , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+</div>
+
   <%= hidden_field_tag :attachments, ''%>
   <% end %>
   <h5 style="color:#24426c;"><i class="fa fa-paperclip" style="vertical-align:-2px;"></i> <%=t :pictures%></h5>
   <hr class="mt-2 mb-4"/>
   <% if @tour_package.id == nil%>
-    <%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
+  <%= render partial: 'uploads/upload_form', locals: {id: '0', ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
   <%else%>
-    <%= render partial: 'uploads/upload_form', locals: {id: @tour_package.id, ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
+  <%= render partial: 'uploads/upload_form', locals: {id: @tour_package.id, ratio: '1/1', class_name: 'TourPackage', type:'tour_package_attachment'}%>
   <%end%>
   <div class="card-footer text-right">
     <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>

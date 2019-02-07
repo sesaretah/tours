@@ -32,4 +32,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def manage_reservations(passenger_id,tour_id)
+    if !tour_id.blank?
+      @tour = Tour.find(tour_id)
+      @reservation = Reservation.create(passenger_id: passenger_id, tour_id: tour_id, user_id: current_user.id, status: false)
+    end
+  end
+
 end

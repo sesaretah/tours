@@ -87,6 +87,7 @@ class TourPackagesController < ApplicationController
   # PATCH/PUT /tour_packages/1
   # PATCH/PUT /tour_packages/1.json
   def update
+    handle_chkbox
     respond_to do |format|
       if @tour_package.update(tour_package_params)
         if params['upload'].blank?
@@ -118,9 +119,20 @@ class TourPackagesController < ApplicationController
     @tour_package = TourPackage.find(params[:id])
   end
 
+  def handle_chkbox
+    @tour_package.father_name_field = false
+    @tour_package.birthdate_field = false
+    @tour_package.place_of_birth_field = false
+    @tour_package.passport_no_field = false
+    @tour_package.en_name_field = false
+    @tour_package.en_surename_field = false
+    @tour_package.en_father_name_field = false
+    @tour_package.attachment_field = false
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def tour_package_params
-    params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid)
+    params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid, :father_name_field, :birthdate_field, :place_of_birth_field,:passport_no_field, :en_name_field,:en_surename_field, :en_father_name_field, :attachment_field, :attachment_message)
   end
 
   def verify_ads

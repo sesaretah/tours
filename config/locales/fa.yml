@@ -227,6 +227,9 @@ fa:
             nation_id: 'ملیت'
             passport_no: 'شماره گذرنامه '
             father_name: 'نام پدر'
+            en_name: 'نام لاتین'
+            en_surename: 'نام خانوادگی لاتین'
+            en_fathername: 'نام پدر لاتین'
         agency:
             name: 'نام شرکت'
             subdomain: 'دامنه'
@@ -243,6 +246,7 @@ fa:
             days: 'تعداد روز'
             nights: 'تعداد شب'
             details: 'توضیحات'
+            attachment_message: 'متن برای مدارک مورد نیاز '
         tour:
           start_date: 'رفت'
           end_date: 'برگشت '
@@ -263,6 +267,21 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  doesnt_match: 'شماره موبایل و رمز هم خوان نیست '
+  ssn: 'کد ملی '
+  surename: 'نام خانوادگی'
+  birthdate: 'تاریخ تولد'
+  passport_no: 'شماره گذرنامه '
+  father_name: 'نام پدر'
+  father_name_field: 'نام پدر'
+  birthdate_field: 'تاریخ تولد'
+  place_of_birth_field: 'محل تولد'
+  passport_no_field: 'شماره گذرنامه'
+  en_name_field: 'نام لاتین'
+  en_surename_field: 'نام خانوادگی لاتین'
+  en_father_name_field: 'نام پدر لاتین'
+  attachment_field: 'پیوست مدارک '
+  required_fields: 'فیلدهای اجباری برای رزرو'
   tour_details: 'شرح '
   bus_name: 'نام شرکت '
   buses_settings: 'تعریف حمل و نقل زمینی'

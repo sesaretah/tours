@@ -27,7 +27,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.new(passenger_params)
     respond_to do |format|
       if @passenger.save
-        manage_reservations
+        manage_reservations(@passenger.id, params[:tour_id])
         manage_uploads
         format.html { redirect_to @passenger, notice: 'Passenger was successfully created.' }
         format.json { render :show, status: :created, location: @passenger }
@@ -63,12 +63,7 @@ class PassengersController < ApplicationController
     end
   end
 
-  def manage_reservations
-    if !params[:tour_id].blank?
-      @tour = Tour.find(params[:tour_id])
-      @reservation = Reservation.create(passenger_id: @passenger.id, tour_id: params[:tour_id] )
-    end
-  end
+
 
   def manage_uploads
     if !params[:attachments].blank?

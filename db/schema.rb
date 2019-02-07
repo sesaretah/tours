@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205162307) do
+ActiveRecord::Schema.define(version: 20190207123328) do
 
   create_table "access_controls", force: :cascade do |t|
     t.string   "uuid",                          limit: 255
@@ -147,6 +147,9 @@ ActiveRecord::Schema.define(version: 20190205162307) do
     t.datetime "updated_at",                 null: false
     t.string   "father_name",    limit: 255
     t.string   "uuid",           limit: 255
+    t.string   "en_name",        limit: 255
+    t.string   "en_surename",    limit: 255
+    t.string   "en_fathername",  limit: 255
   end
 
   add_index "passengers", ["business_id"], name: "index_passengers_on_business_id", using: :btree
@@ -175,13 +178,16 @@ ActiveRecord::Schema.define(version: 20190205162307) do
   add_index "pricings", ["uuid"], name: "index_pricings_on_uuid", unique: true, using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "phone_number", limit: 255
-    t.string   "uuid",         limit: 255
-    t.integer  "user_id",      limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "integer_id",   limit: 4
+    t.string   "name",          limit: 255
+    t.string   "phone_number",  limit: 255
+    t.string   "uuid",          limit: 255
+    t.integer  "user_id",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "integer_id",    limit: 4
+    t.string   "en_name",       limit: 255
+    t.string   "en_surename",   limit: 255
+    t.string   "en_fathername", limit: 255
   end
 
   add_index "profiles", ["integer_id"], name: "index_profiles_on_integer_id", using: :btree
@@ -215,6 +221,7 @@ ActiveRecord::Schema.define(version: 20190205162307) do
     t.datetime "updated_at",               null: false
     t.string   "passenger_id", limit: 255
     t.string   "uuid",         limit: 255
+    t.boolean  "status"
   end
 
   add_index "reservations", ["passenger_id"], name: "index_reservations_on_passenger_id", using: :btree
@@ -231,19 +238,28 @@ ActiveRecord::Schema.define(version: 20190205162307) do
   add_index "roles", ["uuid"], name: "index_roles_on_uuid", unique: true, using: :btree
 
   create_table "tour_packages", force: :cascade do |t|
-    t.string   "title",            limit: 255
-    t.integer  "days",             limit: 4
-    t.integer  "nights",           limit: 4
-    t.text     "details",          limit: 65535
-    t.string   "agency_id",        limit: 255
-    t.string   "uuid",             limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "integer_id",       limit: 4,     null: false
+    t.string   "title",                limit: 255
+    t.integer  "days",                 limit: 4
+    t.integer  "nights",               limit: 4
+    t.text     "details",              limit: 65535
+    t.string   "agency_id",            limit: 255
+    t.string   "uuid",                 limit: 255
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "integer_id",           limit: 4,     null: false
     t.boolean  "view_in_homepage"
-    t.integer  "rank",             limit: 4
-    t.integer  "status",           limit: 4
-    t.integer  "size",             limit: 4
+    t.integer  "rank",                 limit: 4
+    t.integer  "status",               limit: 4
+    t.integer  "size",                 limit: 4
+    t.boolean  "en_name_field"
+    t.boolean  "en_surename_field"
+    t.boolean  "en_father_name_field"
+    t.boolean  "passport_no_field"
+    t.boolean  "father_name_field"
+    t.boolean  "birthdate_field"
+    t.boolean  "place_of_birth_field"
+    t.boolean  "attachment_field"
+    t.text     "attachment_message",   limit: 65535
   end
 
   add_index "tour_packages", ["agency_id"], name: "index_tour_packages_on_agency_id", using: :btree

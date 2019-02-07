@@ -1,8 +1,28 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour]
-  before_action :is_admin, only: []
+  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations]
+  before_action :is_admin, only: [:reservation, :tour_reservations]
   include ActionView::Helpers::TextHelper
+
+  def login
+    if User.find_by_username(params['username']).try(:valid_password?, params[:password])
+      @user = User.find_by_username(params['username'])
+      render :json => {result: 'OK', token: JWTWrapper.encode({ user_id: @user.id }), user_id: @user.id}.to_json , :callback => params['callback']
+    else
+      render :json => {result: 'ERROR',  error: I18n.t(:doesnt_match) }.to_json , :callback => params['callback']
+    end
+  end
+
+
+  def sign_up
+    @user = User.new(username: params['username'], mobile: params['username'], password: params['password'], password_confirmation: params['password_confirmation'])
+    if @user.save
+      @profile = Profile.create(user_id: @user.id, name: params[:name], province_id: params[:province_id])
+      render :json => {result: 'OK', token: JWTWrapper.encode({ user_id: @user.id })}.to_json, :callback => params['callback']
+    else
+      render :json => {result: 'ERROR', error: @user.errors }.to_json , :callback => params['callback']
+    end
+  end
 
   def tour_packages
     if params[:q].blank?
@@ -66,7 +86,45 @@ class ApiController < ApplicationController
       @photos << {url:  request.base_url + photo[:url], id: photo[:id]}
     end
 
-    @result << {id: @tour.id, details: @tour.details ,title: @tour.tour_package.title + " (#{@tour.tour_package.days} #{I18n.t(:days)} #{I18n.t(:and)} #{@tour.tour_package.nights} #{I18n.t(:nights)})", departure: @tour.jalali_start_date, arrival: @tour.jalali_end_date, accomodations: @tour.hotels, transportations: @transportations, pricings: @pricings, photos: @photos}
+    @result << {id: @tour.id, tour_package: @tour.tour_package ,details: @tour.details ,title: @tour.tour_package.title + " (#{@tour.tour_package.days} #{I18n.t(:days)} #{I18n.t(:and)} #{@tour.tour_package.nights} #{I18n.t(:nights)})", departure: @tour.jalali_start_date, arrival: @tour.jalali_end_date, accomodations: @tour.hotels, transportations: @transportations, pricings: @pricings, photos: @photos}
     render :json => {result: 'OK', result:@result}.to_json , :callback => params['callback']
   end
+
+  def reservation
+    @passenger = Passenger.new
+    @passenger.name = params[:name]
+    @passenger.surename = params[:surename]
+    @passenger.father_name = params[:father_name]
+    @passenger.passport_no = params[:passport_no]
+    @passenger.ssn = params[:ssn]
+    @passenger.sex = params[:sex]
+    @passenger.place_of_birth = params[:place_of_birth]
+    @passenger.birthdate = params[:birthdate]
+    @passenger.en_name = params[:en_name]
+    @passenger.en_surename = params[:en_surename]
+    @passenger.en_fathername = params[:en_fathername]
+    if @passenger.save
+      @tour = Tour.find(params['tours'][0]['id'])
+      manage_reservations(@passenger.id,params['tours'][0]['id'])
+      render :json => {result: 'OK', passenger: @passenger, tour: @tour}.to_json , :callback => params['callback']
+    end
+  end
+
+  def tour_reservations
+    @tour = Tour.find(params[:id])
+    @reservations = Reservation.where(tour_id: @tour.id, user_id: current_user.id, status: false)
+    @passengers = []
+    for reservation in @reservations
+      @passengers << reservation.passenger
+    end
+    render :json => {result: 'OK', passengers: @passengers, tour: @tour}.to_json , :callback => params['callback']
+  end
+
+  def is_admin
+    if current_user.blank?
+      head(403)
+    end
+  end
+
+
 end
