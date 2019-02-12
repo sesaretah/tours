@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   get '/api/tour/:id', to: "api#tour"
   get '/api/login', to: "api#login"
   get '/api/tour_reservations/:id', to: "api#tour_reservations"
+  get '/api/delete_reservation/:id', to: "api#delete_reservation"
+
 
 
   post '/api/sign_up', to: "api#sign_up"

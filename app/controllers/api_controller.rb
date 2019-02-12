@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations]
+  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations, :delete_reservation]
   before_action :is_admin, only: [:reservation, :tour_reservations]
   include ActionView::Helpers::TextHelper
 
@@ -112,6 +112,20 @@ class ApiController < ApplicationController
 
   def tour_reservations
     @tour = Tour.find(params[:id])
+    @reservations = Reservation.where(tour_id: @tour.id, user_id: current_user.id, status: false)
+    @passengers = []
+    for reservation in @reservations
+      @passengers << reservation.passenger
+    end
+    render :json => {result: 'OK', passengers: @passengers, tour: @tour}.to_json , :callback => params['callback']
+  end
+
+  def delete_reservation
+    @tour = Tour.find(params[:id])
+    @reservation = Reservation.where(tour_id: @tour.id, user_id: current_user.id, passenger_id: params[:passenger_id],status: false).first
+    if !@reservation.blank?
+      @reservation.destroy
+    end
     @reservations = Reservation.where(tour_id: @tour.id, user_id: current_user.id, status: false)
     @passengers = []
     for reservation in @reservations
