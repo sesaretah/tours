@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations, :delete_reservation]
-  before_action :is_admin, only: [:reservation, :tour_reservations]
+  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations, :delete_reservation, :verify_reservation, :my_reservations]
+  before_action :is_admin, only: [:reservation, :tour_reservations, :my_reservations]
   include ActionView::Helpers::TextHelper
 
   def login
@@ -57,13 +57,20 @@ class ApiController < ApplicationController
       @accomodations = []
       @accomodation1 = tour.accomodations.order('nights desc').limit(2).first
       if !@accomodation1.blank?
-         @accomodations << {name: Hotel.find(@accomodation1.accomodable_id).name, stars: Hotel.find(@accomodation1.accomodable_id).stars}
+        @accomodations << {name: Hotel.find(@accomodation1.accomodable_id).name, stars: Hotel.find(@accomodation1.accomodable_id).stars}
       end
       @accomodation2 = tour.accomodations.order('nights desc').limit(2).last
       if !@accomodation1.blank? && @accomodation1 != @accomodation2
         @accomodations << {name: Hotel.find(@accomodation1.accomodable_id).name, stars: Hotel.find(@accomodation1.accomodable_id).stars}
       end
-      @result << {id: tour.id, departure: tour.jalali_start_date, departure_carrier: @departure_carrier, arrival: tour.jalali_end_date, arrival_carrier: @arrival_carrier, accomodations: @accomodations}
+
+      @price_range = ''
+      @upper_price = tour.pricings.order('value desc').limit(2).first
+      @down_price = tour.pricings.order('value desc').limit(2).last
+      if !@upper_price.blank? && !@down_price.blank?
+        @price_range = "#{@upper_price.value}-#{@down_price.value}"
+      end
+      @result << {id: tour.id, departure: tour.jalali_start_date, departure_carrier: @departure_carrier, arrival: tour.jalali_end_date, arrival_carrier: @arrival_carrier, accomodations: @accomodations, price: @price_range}
     end
     @tour_package_result = {id: @tour_package.id, title: @tour_package.title, content: "#{@tour_package.days} #{I18n.t(:days)} #{I18n.t(:and)} #{@tour_package.nights} #{I18n.t(:nights)}" ,'cover' => request.base_url + @tour_package.cover('medium'), updated_at: @tour_package.updated_at}
     render :json => {result: 'OK', tour_package: @tour_package_result, tours: @result}.to_json , :callback => params['callback']
@@ -132,6 +139,36 @@ class ApiController < ApplicationController
       @passengers << reservation.passenger
     end
     render :json => {result: 'OK', passengers: @passengers, tour: @tour}.to_json , :callback => params['callback']
+  end
+
+  def verify_reservation
+    @tour = Tour.find(params[:id])
+    @reservations = Reservation.where(tour_id: @tour.id, user_id: current_user.id, status: false)
+    @passengers = []
+    for reservation in @reservations
+      reservation.status =  true
+      reservation.save
+      @passengers << reservation.passenger
+    end
+    render :json => {result: 'OK', passengers: @passengers, tour: @tour}.to_json , :callback => params['callback']
+  end
+
+  def verified_reservations
+    @tour = Tour.find(params[:id])
+    @reservations = Reservation.where(tour_id: @tour.id, user_id: current_user.id, status: true)
+    @passengers = []
+    for reservation in @reservations
+      @passengers << reservation.passenger
+    end
+    render :json => {result: 'OK', passengers: @passengers, tour: @tour}.to_json , :callback => params['callback']
+  end
+
+  def my_reservations
+    @result = []
+    current_user.reservations.all.group_by(&:tour).each do |tour, reservations|
+      @result << {tour_package: tour.tour_package, tour:  {id: tour.id , departure: tour.jalali_start_date, arrival: tour.jalali_end_date}}
+    end
+    render :json => {result: 'OK', result: @result}.to_json , :callback => params['callback']
   end
 
   def is_admin
