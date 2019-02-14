@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get '/reservations/passengers', to: "reservations#passengers"
   get '/reservations/verification', to: "reservations#verification"
   get '/reservations/:id/destroy', to: "reservations#destroy"
+  get '/reservations/verify_reservations/:id', to: "reservations#verify_reservations"
+
 
   get '/tour_packages/check/:id', to: "tour_packages#check"
   get '/tour_packages/change_rank/:id', to: "tour_packages#change_rank"

@@ -37,7 +37,14 @@ class Tour < ActiveRecord::Base
 
   def remained_capacity
     @reservations_count = self.reservations.count
-    @remainder = self.capacity - @reservations_count
+    if @reservations_count.blank?
+      @reservations_count = 0
+    end
+    if !self.capacity.blank?
+      @remainder = self.capacity - @reservations_count
+    else
+      @remainder = 0
+    end
     if @remainder > -1
       return @remainder
     end

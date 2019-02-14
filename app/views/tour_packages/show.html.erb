@@ -114,8 +114,10 @@
             </td>
             <td class="text-right">
               <div style="white-space: nowrap;">
-              <%= link_to "/reservations/new?tour_id=#{tour.id}", class:'btn btn-sm btn-success' do%>
-              <i class="fe fe-plus-circle" style="vertical-align: -3px;"></i> <%=t :reservation%>
+              <% if tour.remained_capacity > 0%>
+                <%= link_to "/reservations/new?tour_id=#{tour.id}", class:'btn btn-sm btn-success' do%>
+                  <i class="fe fe-plus-circle" style="vertical-align: -3px;"></i> <%=t :reservation%>
+                <%end%>
               <%end%>
               <%= link_to "/tours/#{tour.uuid}", class:'btn btn-sm btn-secondary' do%>
               <i class="fe fe-play"></i><%=t :show%>

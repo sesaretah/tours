@@ -1,28 +1,31 @@
 <div id="tour-list">
-  <div class="table-responsive">
-    <table class="table table-hover table-outline table-vcenter card-table">
-      <thead>
-        <tr>
-          <td><%=t :name%></td>
-          <td><%=t :surename%></td>
-          <td><%=t :ssn%></td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for passenger in tour.passengers%>
-        <tr>
-          <td><%= passenger.name%></td>
-          <td><%= passenger.surename%></td>
-          <td><%= passenger.ssn%></td>
-          <td>
-            <%= link_to "/reservations/#{passenger.reservations.where(tour_id: tour.id).first.id}/destroy", method: :get, remote: true, class: "icon" ,data: { confirm: 'Are you sure?' } do %>
-            <i class="fe fe-trash" style='vertical-align:-3px;'></i>
-            <%end%>
-          </td>
-        </tr>
-        <%end%>
-      </tabody>
-    </table>
+  <div class="col-lg-12">
+    <div class="table-responsive">
+      <table class="table table-hover table-outline table-vcenter card-table">
+        <thead>
+          <tr>
+            <td><%=t :name%></td>
+            <td><%=t :surename%></td>
+            <td><%=t :ssn%></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for reservation in tour.reservations.where(user_id: current_user.id, status: false)%>
+          <% @passenger = reservation.passenger%>
+          <tr>
+            <td><%= @passenger.name%></td>
+            <td><%= @passenger.surename%></td>
+            <td><%= @passenger.ssn%></td>
+            <td>
+              <%= link_to "/reservations/#{reservation.id}/destroy", method: :get, remote: true, class: "icon" ,data: { confirm: 'Are you sure?' } do %>
+              <i class="fe fe-trash" style='vertical-align:-3px;'></i>
+              <%end%>
+            </td>
+          </tr>
+          <%end%>
+        </tabody>
+      </table>
+    </div>
   </div>
 </div>

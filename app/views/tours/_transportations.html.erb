@@ -17,7 +17,9 @@
             <td><%=t transportation.transportable_type.downcase%></td>
             <td><%= transportation.transportable_type.classify.constantize.find(transportation.transportable_id).name%></td>
             <td><%=t transportation.leg.downcase%></td>
-            <td><%=t transportation.transport_time.strftime("%H:%M")%></td>
+            <td>
+              <%=t transportation.transport_time.strftime("%H:%M") rescue nil%>
+            </td>
           </tr>
           <%end%>
         </tbody>

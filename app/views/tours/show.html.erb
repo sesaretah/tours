@@ -44,8 +44,10 @@
       <div class="card-header">
         <h3 class="card-title"></h3>
         <div class="card-options">
+          <% if @tour.remained_capacity > 0%>
           <%= link_to "/reservations/new?tour_id=#{@tour.id}", class:'btn btn-success ml-2' do%>
           <i class="fe fe-plus-circle" style="vertical-align: -3px;"></i> <%=t :reservation%>
+          <%end%>
           <%end%>
           <a href="/tours/<%=@tour.uuid%>/edit" class='btn btn-secondary'><i class="fe fe-edit" style="vertical-align:-3px;"></i> <%=t :edit%></a>
         </div>
