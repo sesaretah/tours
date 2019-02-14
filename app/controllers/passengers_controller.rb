@@ -25,10 +25,18 @@ class PassengersController < ApplicationController
   # POST /passengers.json
   def create
     @passenger = Passenger.new(passenger_params)
+    @tour = Tour.find(params[:tour_id])
+    if @tour.remained_capacity > 0
+      @passenger.save
+      manage_reservations(@passenger.id, params[:tour_id])
+      manage_uploads
+    else
+
+    end
     respond_to do |format|
-      if @passenger.save
-        manage_reservations(@passenger.id, params[:tour_id])
-        manage_uploads
+      if
+
+
         format.html { redirect_to @passenger, notice: 'Passenger was successfully created.' }
         format.json { render :show, status: :created, location: @passenger }
         format.js
