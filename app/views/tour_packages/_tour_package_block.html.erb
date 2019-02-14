@@ -1,5 +1,5 @@
 <div class="card">
-  <a href="/tour_packages/<%= tour_package.id%>"><img class="card-img-top" src="<%= tour_package.image('medium')%>" alt="And this isn't my nose. This is a false one."></a>
+  <a href="/tour_packages/<%= tour_package.id%>"><img class="card-img-top" src="<%= tour_package.image('medium')%>" alt="<%= tour_package.title%>"></a>
   <div class="card-body d-flex flex-column">
     <h4><a href="#"><%= tour_package.title%></a></h4>
     <div class="text-muted"><%= truncate( tour_package.details, length: 70)%></div>

@@ -268,7 +268,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
-  back: 'بازگشت به صفحه اول'    
+  final_verification: 'تایید نهایی'
+  back: 'بازگشت به صفحه اول'
   your_reservation_is_completed: 'رزرواسیون با موفقیت انجام شد '
   transport_time: 'زمان حرکت '
   doesnt_match: 'شماره موبایل و رمز هم خوان نیست '

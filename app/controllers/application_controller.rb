@@ -39,4 +39,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def manage_uploads(id)
+    if !params[:attachments].blank?
+      @upload_ids = params[:attachments].split(',')
+      for upload_id in @upload_ids
+        if !upload_id.blank?
+          @upload = Upload.find_by_id(upload_id)
+          if !@upload.blank?
+            @upload.uploadable_id = id
+            @upload.save
+          end
+        end
+      end
+    end
+  end
+
 end

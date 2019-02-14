@@ -100,7 +100,11 @@
   </div>
 </div>
 
-  <%= hidden_field_tag :attachments, ''%>
+<% if @upload_ids.blank?%>
+<%= hidden_field_tag :attachments, ''%>
+<%else%>
+<%= hidden_field_tag :attachments, @upload_ids.split(',')%>
+<%end%>
   <% end %>
   <h5 style="color:#24426c;"><i class="fa fa-paperclip" style="vertical-align:-2px;"></i> <%=t :pictures%></h5>
   <hr class="mt-2 mb-4"/>

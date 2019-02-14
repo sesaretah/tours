@@ -66,6 +66,7 @@ class TourPackagesController < ApplicationController
 
   # GET /tour_packages/1/edit
   def edit
+      @upload_ids = Upload.where(uploadable_type: 'Blog', uploadable_id: @blog.id).pluck(:id)
   end
 
   # POST /tour_packages
@@ -75,7 +76,8 @@ class TourPackagesController < ApplicationController
 
     respond_to do |format|
       if @tour_package.save
-        format.html { redirect_to @tour_package.id, notice: 'Tour package was successfully created.' }
+        manage_uploads(@tour_package.id)
+        format.html { redirect_to "/tour_packages/#{@tour_package.id}", notice: 'Tour package was successfully created.' }
         format.json { render :show, status: :created, location: @tour_package }
       else
         format.html { render :new }
