@@ -66,7 +66,7 @@ class TourPackagesController < ApplicationController
 
   # GET /tour_packages/1/edit
   def edit
-      @upload_ids = Upload.where(uploadable_type: 'Blog', uploadable_id: @blog.id).pluck(:id)
+      @upload_ids = Upload.where(uploadable_type: 'TourPackage', uploadable_id: @tour_package.id).pluck(:id)
   end
 
   # POST /tour_packages

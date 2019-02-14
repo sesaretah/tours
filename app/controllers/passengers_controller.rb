@@ -30,20 +30,6 @@ class PassengersController < ApplicationController
       @passenger.save
       manage_reservations(@passenger.id, params[:tour_id])
       manage_uploads
-    else
-
-    end
-    respond_to do |format|
-      if
-
-
-        format.html { redirect_to @passenger, notice: 'Passenger was successfully created.' }
-        format.json { render :show, status: :created, location: @passenger }
-        format.js
-      else
-        format.html { render :new }
-        format.json { render json: @passenger.errors, status: :unprocessable_entity }
-      end
     end
   end
 

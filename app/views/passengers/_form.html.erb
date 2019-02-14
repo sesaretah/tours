@@ -1,4 +1,5 @@
 <div id="passenger-form" class="card">
+  <% if @tour.remained_capacity > 0%>
 <%= form_for(passenger, remote: true) do |f| %>
 <div class="card-header">
 <%=t :passenger_info%>
@@ -129,4 +130,7 @@
       $( "#new_passenger" ).submit();
     });
   </script>
+  <%else%>
+  <%=t :no_capacity%>
+  <%end%>
 </div>
