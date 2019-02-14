@@ -35,6 +35,14 @@ class Tour < ActiveRecord::Base
     self.uuid = SecureRandom.uuid
   end
 
+  def remained_capacity
+    @reservations_count = self.reservations.count
+    @remainder = self.capacity - @reservations_count
+    if @remainder > -1
+      return @remainder
+    end
+  end
+
   def id
     self.uuid
   end

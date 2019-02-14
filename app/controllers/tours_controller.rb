@@ -79,7 +79,13 @@ class ToursController < ApplicationController
     params.each do |name, value|
       if name =~ /carrier_(.+)$/
         if !value.blank?
-          Transportation.create(transportable_type: value.singularize.classify.constantize, transportable_id: params["transportation_id_#{$1}"] , tour_id: @tour.id, leg: params["leg_#{$1}"])
+          @transportable_type = value.singularize.classify.constantize
+          @transportable_id = params["transportation_id_#{$1}"]
+          @tour_id = @tour.id
+          @leg = params["leg_#{$1}"]
+          @hour = params["time_#{$1}"]['hour']
+          @minute = params["time_#{$1}"]['minute']
+          Transportation.create(transportable_type: @transportable_type, transportable_id: @transportable_id  , tour_id: @tour_id  , leg: @leg, transport_time: "#{@hour}:#{@minute}")
         end
       end
     end
@@ -102,7 +108,7 @@ class ToursController < ApplicationController
     end
     params.each do |name, value|
       if name =~ /accomodation_type_(.+)$/
-        if !params["duration_#{$1}"].blank?
+        if !params["accomodation_type_#{$1}"].blank? && !params["duration_#{$1}"].blank?
           Accomodation.create(tour_id: @tour.id, accomodable_type: 'Hotel', accomodable_id: value, nights: params["duration_#{$1}"])
         end
       end
@@ -142,6 +148,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:start_date, :end_date, :price, :details, :tour_package_id, :uuid)
+      params.require(:tour).permit(:start_date, :end_date, :price, :details, :tour_package_id, :uuid, :capacity)
     end
 end

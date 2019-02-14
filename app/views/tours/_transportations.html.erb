@@ -8,6 +8,7 @@
             <td><%=t :type%></td>
             <td><%=t :company%></td>
             <td><%=t :transportation_type%></td>
+            <td><%=t :transport_time%></td>
           </tr>
         </thead>
         <tbody style='border: 1px solid #80808057;'>
@@ -16,6 +17,7 @@
             <td><%=t transportation.transportable_type.downcase%></td>
             <td><%= transportation.transportable_type.classify.constantize.find(transportation.transportable_id).name%></td>
             <td><%=t transportation.leg.downcase%></td>
+            <td><%=t transportation.transport_time.strftime("%H:%M")%></td>
           </tr>
           <%end%>
         </tbody>

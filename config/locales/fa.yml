@@ -251,6 +251,7 @@ fa:
           start_date: 'رفت'
           end_date: 'برگشت '
           details: 'توضیحات'
+          capacity: 'ظرفیت '
         blog:
             title: 'عنوان'
             content: 'متن'
@@ -267,6 +268,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  transport_time: 'زمان حرکت '
   doesnt_match: 'شماره موبایل و رمز هم خوان نیست '
   ssn: 'کد ملی '
   surename: 'نام خانوادگی'
