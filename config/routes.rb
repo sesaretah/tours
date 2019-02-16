@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   get '/api/verify_reservation/:id', to: "api#verify_reservation"
   get '/api/verified_reservations/:id', to: "api#verified_reservations"
   get '/api/my_reservations', to: "api#my_reservations"
+  get '/api/blogs', to: "api#blogs"
+  get '/api/blog/:id', to: "api#blog"
 
   post '/api/sign_up', to: "api#sign_up"
   post '/api/reservation', to: "api#reservation"

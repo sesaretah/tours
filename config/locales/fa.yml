@@ -268,6 +268,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  no_capacity: 'ظرفیت به اتمام رسید '
+  person: 'نفر'
+  remained_capacity: 'ظرفیت باقیمانده '
   final_verification: 'تایید نهایی'
   back: 'بازگشت به صفحه اول'
   your_reservation_is_completed: 'رزرواسیون با موفقیت انجام شد '
