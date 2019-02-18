@@ -75,7 +75,7 @@
               <div class="small text-muted">
                 <% @transportation = tour.transportations.where(leg: "Departure").order(:created_at).first%>
                 <% if !@transportation.blank?%>
-                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name%>
+                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name rescue nil%>
                 <%end%>
               </div>
             </td>
@@ -86,7 +86,7 @@
               <div class="small text-muted">
                 <% @transportation = tour.transportations.where(leg: "Arrival").order(:created_at).first%>
                 <% if !@transportation.blank?%>
-                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name%>
+                <%=t @transportation.transportable_type.downcase.pluralize%>: <%= @transportation.transportable_type.classify.constantize.find(@transportation.transportable_id).name rescue nil%>
                 <%end%>
               </div>
             </td>
