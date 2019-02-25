@@ -73,7 +73,7 @@ class TourPackagesController < ApplicationController
   # POST /tour_packages.json
   def create
     @tour_package = TourPackage.new(tour_package_params)
-
+    @tour_package.agency_id = current_user.agency.id
     respond_to do |format|
       if @tour_package.save
         manage_uploads(@tour_package.id)
@@ -134,7 +134,7 @@ class TourPackagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tour_package_params
-    params.require(:tour_package).permit(:title, :days, :nights, :details, :agency_id, :uuid, :father_name_field, :birthdate_field, :place_of_birth_field,:passport_no_field, :en_name_field,:en_surename_field, :en_father_name_field, :attachment_field, :attachment_message)
+    params.require(:tour_package).permit(:title, :days, :nights, :details, :uuid, :father_name_field, :birthdate_field, :place_of_birth_field,:passport_no_field, :en_name_field,:en_surename_field, :en_father_name_field, :attachment_field, :attachment_message)
   end
 
   def verify_ads

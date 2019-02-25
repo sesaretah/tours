@@ -1,0 +1,10 @@
+<div id="settings-detail">
+  <div class="card-header">
+
+  </div>
+  <div class="card-body">
+    <% for tour_package in current_user.tour_packages%>
+    <div><%= tour_package.title%></div>
+    <%end%>
+  </div>
+</div>

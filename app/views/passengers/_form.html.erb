@@ -126,7 +126,7 @@
         <button id='submit-btn' type="button" class="btn btn-primary"><%=t :submit%></button>
       </div>
       <script>
-      $( "#submit-btn" ).click(function() {
+      $( "#submit-btn" ).one('click', function(event) {
         var form = $("#new_passenger");
         if (form[0].checkValidity() === false) {
           event.preventDefault()

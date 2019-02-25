@@ -5,7 +5,7 @@ class ToursController < ApplicationController
   # GET /tours
   # GET /tours.json
   def index
-    @tours = Tour.all
+    #@tours = Tour.all
   end
 
   # GET /tours/1
@@ -65,9 +65,10 @@ class ToursController < ApplicationController
   # DELETE /tours/1
   # DELETE /tours/1.json
   def destroy
+    @tour_package = @tour.tour_package
     @tour.destroy
     respond_to do |format|
-      format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
+      format.html { redirect_to @tour_package, notice: 'Tour was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

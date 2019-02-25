@@ -4,6 +4,11 @@ $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'seg
 $("#homepage-nav").addClass('active');
 <%end%>
 
+<% if @section == 'reservations'%>
+$("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'reservations/list')) %>");
+$("#homepage-nav").addClass('active');
+<%end%>
+
 <% if @section == 'awaiting_ads'%>
 $("#settings-detail").replaceWith("<%= escape_javascript(render(:partial => 'settings/awaiting_ads')) %>");
 $("#awaiting_ads-nav").addClass('active');

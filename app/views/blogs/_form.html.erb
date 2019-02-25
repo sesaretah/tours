@@ -31,12 +31,13 @@
   </div>
 </div>
   <div class="card-footer text-right">
-    <button id='submit-btn' type="submit" class="btn btn-primary"><%=t :submit%></button>
+    <button id='submit-btn' type="button" class="btn btn-primary"><%=t :submit%></button>
   </div>
   <script>
-  $( "#submit-btn" ).click(function() {
-    console.log('clicked');
-    $( ".<%= params[:action]%>_blog" ).submit();
+  $(document).ready(function(){
+    $( "#submit-btn" ).one('click', function(event) {
+      $( "#new_blog" ).submit();
+    });
   });
   </script>
 </div>

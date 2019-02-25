@@ -49,6 +49,9 @@
           <i class="fe fe-plus-circle" style="vertical-align: -3px;"></i> <%=t :reservation%>
           <%end%>
           <%end%>
+          <%= link_to @tour_package, class: "btn btn-secondary", style:'font-weight:normal;',  method: :delete, data: { confirm: 'Are you sure?' } do%>
+          <i class="fe fe-trash" style="vertical-align:middle;"></i> <%=t :destroy%>
+          <%end%>
           <a href="/tours/<%=@tour.uuid%>/edit" class='btn btn-secondary'><i class="fe fe-edit" style="vertical-align:-3px;"></i> <%=t :edit%></a>
         </div>
       </div>

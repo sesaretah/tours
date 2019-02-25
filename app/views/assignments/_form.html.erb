@@ -9,7 +9,7 @@
             <%= select_tag :role_id, options_for_select(Role.all.collect { |p| [ p.title, p.id ] }), {class: "form-control"} %>
       </div>
       <div class="col-md-2">
-        <button type="submit" class="btn btn-secondary"><%=t :submit%></button>
+        <button type="submit" class="btn btn-secondary" data-disable="true"><%=t :submit%></button>
       </div>
     </div>
     <%end%>

@@ -268,6 +268,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  ziarat: 'اپلیکیشن جامع زیارت'
+  copyrights: 'کلیه ی حقوق این سایت متعق است به'
+  reservations: 'رزرو ها '
+  destroy: 'حذف '
   no_capacity: 'ظرفیت به اتمام رسید '
   person: 'نفر'
   remained_capacity: 'ظرفیت باقیمانده '

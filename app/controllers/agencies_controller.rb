@@ -14,7 +14,11 @@ class AgenciesController < ApplicationController
 
   # GET /agencies/new
   def new
-    @agency = Agency.new
+    if current_user.agency.blank?
+      @agency = Agency.new
+    else
+      redirect_to "/agencies/#{current_user.agency.id}/edit"
+    end
   end
 
   # GET /agencies/1/edit
@@ -25,7 +29,7 @@ class AgenciesController < ApplicationController
   # POST /agencies.json
   def create
     @agency = Agency.new(agency_params)
-
+    @agency.user_id = current_user.id
     respond_to do |format|
       if @agency.save
         format.html { redirect_to @agency, notice: 'Agency was successfully created.' }
@@ -40,6 +44,7 @@ class AgenciesController < ApplicationController
   # PATCH/PUT /agencies/1
   # PATCH/PUT /agencies/1.json
   def update
+    @agency.user_id = current_user.id
     respond_to do |format|
       if @agency.update(agency_params)
         format.html { redirect_to @agency, notice: 'Agency was successfully updated.' }
@@ -69,6 +74,6 @@ class AgenciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agency_params
-      params.require(:agency).permit(:name, :tel, :telegram_channel, :instagram_page, :address, :uuid, :user_id, :subdomain, :mobile, :fax, :email, :about_us)
+      params.require(:agency).permit(:name, :tel, :telegram_channel, :instagram_page, :address, :subdomain, :mobile, :fax, :email, :about_us)
     end
 end
