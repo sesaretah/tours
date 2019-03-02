@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213162514) do
+ActiveRecord::Schema.define(version: 20190302130443) do
 
   create_table "access_controls", force: :cascade do |t|
     t.string   "uuid",                          limit: 255
@@ -188,9 +188,11 @@ ActiveRecord::Schema.define(version: 20190213162514) do
     t.string   "en_name",       limit: 255
     t.string   "en_surename",   limit: 255
     t.string   "en_fathername", limit: 255
+    t.string   "province_id",   limit: 255
   end
 
   add_index "profiles", ["integer_id"], name: "index_profiles_on_integer_id", using: :btree
+  add_index "profiles", ["province_id"], name: "index_profiles_on_province_id", using: :btree
   add_index "profiles", ["uuid"], name: "index_profiles_on_uuid", unique: true, using: :btree
 
   create_table "provinces", force: :cascade do |t|

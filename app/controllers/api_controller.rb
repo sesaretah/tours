@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations, :delete_reservation, :verify_reservation, :my_reservations, :blogs, :blog]
+  before_filter :authenticate_user!, :except => [:tour_packages, :tour_package, :tour, :reservation, :login, :sign_up, :tour_reservations, :delete_reservation, :verify_reservation, :my_reservations, :blogs, :blog, :provinces]
   before_action :is_admin, only: [:reservation, :tour_reservations, :my_reservations]
   include ActionView::Helpers::TextHelper
 
@@ -11,6 +11,11 @@ class ApiController < ApplicationController
     else
       render :json => {result: 'ERROR',  error: I18n.t(:doesnt_match) }.to_json , :callback => params['callback']
     end
+  end
+
+  def provinces
+    @provinces = Province.all.order('name')
+    render :json => {result: 'OK', provinces: @provinces}.to_json , :callback => params['callback']
   end
 
 
